@@ -12,10 +12,10 @@ import gym
 from env.custom_hopper import *
 
 def main():
-    render = False
+    render = True
 
-    env = gym.make('CustomHopper-source-v0')
-    # env = gym.make('CustomHopper-target-v0')
+    #env = gym.make('CustomHopper-source-v0')
+    env = gym.make('CustomHopper-target-v0')
 
     print('State space:', env.observation_space)  # state-space
     print('Action space:', env.action_space)  # action-space

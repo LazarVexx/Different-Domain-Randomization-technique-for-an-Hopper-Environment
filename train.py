@@ -5,20 +5,119 @@
 """
 import gym
 from env.custom_hopper import *
+import matplotlib.pyplot as plt
+import argparse
+import os
+from stable_baselines3 import SAC, PPO
+from stable_baselines3.common.evaluation import evaluate_policy
+from stable_baselines3.common.monitor import Monitor
+from stable_baselines3.common.results_plotter import load_results, ts2xy
+
+def create_model_and_train(env, env_name, model_name='ppo', n_timesteps=10000, udr=False):
+    log_dir = "./tmp/gym/" + env_name + "/"    
+       
+    if model_name == 'ppo':
+        model = PPO('MlpPolicy', env, verbose=1)
+    elif model_name == 'sac':
+        model = SAC('MlpPolicy', env, verbose=1)
+    else:
+        raise ValueError('Unknown model name')
+    
+    if udr:
+        print("Training with uniform domain randomization")
+        batch_size = model.n_steps if model_name=='ppo' else 1 ## For PPO with Uniform Domain Randomization
+        for _ in range(n_timesteps // batch_size):
+            env.set_random_parameters()
+            model.learn(total_timesteps=1, reset_num_timesteps=False)
+    else:    
+        print("Training without domain randomization")
+        model.learn(total_timesteps=n_timesteps)
+        
+    model.save(os.path.join(log_dir, "trained_model"))
+    plot_results(log_dir)
+    return model
+
+def evaluate_model(model, env, n_eval_episodes):
+    mean_reward, std_reward = evaluate_policy(model, env, n_eval_episodes=n_eval_episodes)
+    return mean_reward, std_reward
+
+def moving_average(values, window):
+    """
+    Smooth values by doing a moving average
+    :param values: (numpy array)
+    :param window: (int)
+    :return: (numpy array)
+    """
+    weights = np.repeat(1.0, window) / window
+    return np.convolve(values, weights, "valid")
+
+
+def plot_results(log_folder, title="Learning Curve"):
+    """
+    plot the results
+
+    :param log_folder: (str) the save location of the results to plot
+    :param title: (str) the title of the task to plot
+    """
+    x, y = ts2xy(load_results(log_folder), "timesteps")
+    y = moving_average(y, window=50)
+    # Truncate x
+    x = x[len(x) - len(y) :]
+
+    fig = plt.figure(title)
+    plt.plot(x, y)
+    plt.xlabel("Number of Timesteps")
+    plt.ylabel("Rewards")
+    plt.title(title + " Smoothed")
+    plt.show()
 
 def main():
-    env = gym.make('CustomHopper-source-v0')
+    source_env_name = 'CustomHopper-source-v0'
+    target_env_name = 'CustomHopper-target-v0'
+    algorithm = 'ppo'
+    total_timesteps = 100000
+    test_episodes = 5000
+    uniform_domain_randomization = True
+    
+    log_dir = "./tmp/gym/" + source_env_name + "/"
+    os.makedirs(log_dir, exist_ok=True)
+       
+    source_env = gym.make(source_env_name)
+    source_env = Monitor(source_env, log_dir)
+    
+    print(source_env_name+' State space:', source_env.observation_space)  # state-space
+    print(source_env_name+' Action space:', source_env.action_space)  # action-space
+    print(source_env_name+' Dynamics parameters:', source_env.get_parameters())  # masses of each link of the Hopper
+    
+    log_dir = "./tmp/gym/" + target_env_name + "/"
+    os.makedirs(log_dir, exist_ok=True)
+    
+    target_env = gym.make(target_env_name)
+    target_env = Monitor(target_env, log_dir)
+    
+    print(target_env_name+' State space:', target_env.observation_space)  # state-space
+    print(target_env_name+' Action space:', target_env.action_space)  # action-space
+    print(target_env_name+' Dynamics parameters:', target_env.get_parameters())  # masses of each link of the Hopper
+    
+    print("Training on source environment...")
+    source_model = create_model_and_train(source_env,source_env_name, algorithm, total_timesteps, uniform_domain_randomization)
 
-    print('State space:', env.observation_space)  # state-space
-    print('Action space:', env.action_space)  # action-space
-    print('Dynamics parameters:', env.get_parameters())  # masses of each link of the Hopper
+    print("Training on target environment...")
+    target_model = create_model_and_train(target_env,target_env_name, algorithm, total_timesteps, uniform_domain_randomization)
 
-    """
-        TODO:
+    print("Evaluating models...")
+    results = {}
+    results['source->source'] = evaluate_model(source_model, source_env, test_episodes)
+    results['source->target'] = evaluate_model(source_model, target_env, test_episodes)
+    results['target->target'] = evaluate_model(target_model, target_env, test_episodes)
 
-            - train a policy with stable-baselines3 on the source Hopper env
-            - test the policy with stable-baselines3 on <source,target> Hopper envs (hint: see the evaluate_policy method of stable-baselines3)
-    """
+    print("\nResults:")
+    for config, (mean, std) in results.items():
+        print(f"{config}: Mean Reward = {mean:.2f}, Std Dev = {std:.2f}" )
+        
+    source_env.close()
+    target_env.close()
+
 
 if __name__ == '__main__':
     main()

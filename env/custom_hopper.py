@@ -25,13 +25,15 @@ class CustomHopper(MujocoEnv, utils.EzPickle):
         """Set random masses
         TODO
         """
-        self.set_parameters(*self.sample_parameters())
+        self.set_parameters(self.sample_parameters())
 
     def sample_parameters(self):
         """Sample masses according to a domain randomization distribution
         TODO
         """
-        return
+        num_links = len(self.sim.model.body_mass) - 1
+        sampled_masses = np.random.normal(loc=1.0, scale=0.1, size=num_links)
+        return sampled_masses
 
     def get_parameters(self):
         """Get value of mass for each link"""
@@ -41,6 +43,7 @@ class CustomHopper(MujocoEnv, utils.EzPickle):
     def set_parameters(self, task):
         """Set each hopper link's mass to a new value"""
         self.sim.model.body_mass[1:] = task
+        self.sim.model.body_mass[1] -= 1.0
 
     def step(self, a):
         """Step the simulation to the next timestep
