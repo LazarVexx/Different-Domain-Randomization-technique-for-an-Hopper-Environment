@@ -20,7 +20,6 @@ class CustomHopper(MujocoEnv, utils.EzPickle):
         if domain == 'source':  # Source environment has an imprecise torso mass (1kg shift)
             self.sim.model.body_mass[1] -= 1.0
 
-
     def set_random_parameters(self):
         """Set random masses
         TODO
@@ -43,7 +42,27 @@ class CustomHopper(MujocoEnv, utils.EzPickle):
     def set_parameters(self, task):
         """Set each hopper link's mass to a new value"""
         self.sim.model.body_mass[1:] = task
-        self.sim.model.body_mass[1] -= 1.0
+        self.sim.model.body_mass[1] -= 1.0     
+    
+    def set_adr_parameters(self, step, total_steps):
+        """Adjust the domain randomization parameters based on the ADR schedule"""
+        adr_factor = self.get_adr_factor(step, total_steps)
+        #print(f"Applying ADR with factor {adr_factor:.2f}")
+
+        # Scale the randomization based on adr_factor
+        num_links = len(self.sim.model.body_mass) - 1
+        sampled_masses = np.random.normal(loc=1.0, scale=0.1 * adr_factor, size=num_links)
+        self.set_parameters(sampled_masses)
+        #print(self.sim.model.body_mass)
+    
+    def get_adr_factor(self, current_step, total_steps, max_factor=1.0, min_factor=0.2):
+        """
+        Get the randomization factor based on current step in training.
+        - max_factor: the randomization factor at the start (high randomization).
+        - min_factor: the randomization factor at the end (low randomization).
+        """
+        # Linear decay of the randomization factor
+        return max(min_factor, max_factor * (1 - current_step / total_steps))
 
     def step(self, a):
         """Step the simulation to the next timestep

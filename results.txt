@@ -17,3 +17,16 @@ Results PPO udr:
 source->source: Mean Reward = 410.70, Std Dev = 4.01
 source->target: Mean Reward = 445.23, Std Dev = 7.23
 target->target: Mean Reward = 820.62, Std Dev = 86.61
+
+('world', 'torso', 'thigh', 'leg', 'foot')
+
+Results PPO adr:
+source->source: Mean Reward = 790.38, Std Dev = 4.84
+source->target: Mean Reward = 805.43, Std Dev = 9.55
+target->target: Mean Reward = 804.62, Std Dev = 56.63
+
+Results SAC adr:
+source->source: Mean Reward = 358.62, Std Dev = 3.17
+source->target: Mean Reward = 363.63, Std Dev = 3.06
+target->target: Mean Reward = 318.34, Std Dev = 5.88
+

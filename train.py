@@ -26,8 +26,9 @@ def create_model_and_train(env, env_name, model_name='ppo', n_timesteps=10000, u
     if udr:
         print("Training with uniform domain randomization")
         batch_size = model.n_steps if model_name=='ppo' else 1 ## For PPO with Uniform Domain Randomization
-        for _ in range(n_timesteps // batch_size):
-            env.set_random_parameters()
+        for step in range(n_timesteps // batch_size):
+            #env.set_random_parameters()
+            env.set_adr_parameters(step, n_timesteps // batch_size)
             model.learn(total_timesteps=1, reset_num_timesteps=False)
     else:    
         print("Training without domain randomization")
@@ -74,7 +75,7 @@ def plot_results(log_folder, title="Learning Curve"):
 def main():
     source_env_name = 'CustomHopper-source-v0'
     target_env_name = 'CustomHopper-target-v0'
-    algorithm = 'ppo'
+    algorithm = 'sac'
     total_timesteps = 100000
     test_episodes = 5000
     uniform_domain_randomization = True
