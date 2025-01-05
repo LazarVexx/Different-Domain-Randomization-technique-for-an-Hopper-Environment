@@ -13,7 +13,7 @@ from stable_baselines3.common.evaluation import evaluate_policy
 from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.results_plotter import load_results, ts2xy
 
-def create_model_and_train(env, env_name, model_name='ppo', n_timesteps=10000, udr=False):
+def create_model_and_train(env, env_name, model_name='ppo', n_timesteps=10000, randomization=False, randomization_type='uniform'):
     log_dir = "./tmp/gym/" + env_name + "/"    
        
     if model_name == 'ppo':
@@ -23,12 +23,21 @@ def create_model_and_train(env, env_name, model_name='ppo', n_timesteps=10000, u
     else:
         raise ValueError('Unknown model name')
     
-    if udr:
-        print("Training with uniform domain randomization")
+    if randomization:
+        print("Training with " + randomization_type + " domain randomization")
         batch_size = model.n_steps if model_name=='ppo' else 1 ## For PPO with Uniform Domain Randomization
         for step in range(n_timesteps // batch_size):
-            #env.set_random_parameters()
-            env.set_adr_parameters(step, n_timesteps // batch_size)
+            if randomization_type == 'uniform':
+                env.set_random_parameters()
+            elif randomization_type == 'adaptive':
+                env.set_adr_parameters(step, n_timesteps // batch_size)
+            elif randomization_type == 'custom':
+                env.set_cdr_parameters()
+            elif randomization_type == 'entropy maximization':
+                env.set_doraemon_parameters(step, n_timesteps // batch_size)
+            else:
+                raise ValueError('Unknown randomization type')               
+            
             model.learn(total_timesteps=1, reset_num_timesteps=False)
     else:    
         print("Training without domain randomization")
@@ -75,10 +84,11 @@ def plot_results(log_folder, title="Learning Curve"):
 def main():
     source_env_name = 'CustomHopper-source-v0'
     target_env_name = 'CustomHopper-target-v0'
-    algorithm = 'sac'
+    algorithm = 'ppo'
     total_timesteps = 100000
     test_episodes = 5000
-    uniform_domain_randomization = True
+    randomization = True
+    randomization_type = 'entropy maximization'
     
     log_dir = "./tmp/gym/" + source_env_name + "/"
     os.makedirs(log_dir, exist_ok=True)
@@ -101,10 +111,10 @@ def main():
     print(target_env_name+' Dynamics parameters:', target_env.get_parameters())  # masses of each link of the Hopper
     
     print("Training on source environment...")
-    source_model = create_model_and_train(source_env,source_env_name, algorithm, total_timesteps, uniform_domain_randomization)
+    source_model = create_model_and_train(source_env,source_env_name, algorithm, total_timesteps, randomization, randomization_type)
 
     print("Training on target environment...")
-    target_model = create_model_and_train(target_env,target_env_name, algorithm, total_timesteps, uniform_domain_randomization)
+    target_model = create_model_and_train(target_env,target_env_name, algorithm, total_timesteps, randomization, randomization_type)
 
     print("Evaluating models...")
     results = {}
