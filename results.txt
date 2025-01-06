@@ -49,3 +49,8 @@ Result PPO Domain Randomization with Entropy Maximization:
 source->source: Mean Reward = 753.29, Std Dev = 65.90
 source->target: Mean Reward = 780.49, Std Dev = 144.85
 target->target: Mean Reward = 887.39, Std Dev = 20.90
+
+Result SAC Domain Randomization with Entropy Maximization with 1_000_000:
+source->source: Mean Reward = 2134.51, Std Dev = 42.17
+source->target: Mean Reward = 2175.13, Std Dev = 37.85
+target->target: Mean Reward = 1748.47, Std Dev = 5.87

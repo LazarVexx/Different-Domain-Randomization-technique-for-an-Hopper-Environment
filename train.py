@@ -84,8 +84,8 @@ def plot_results(log_folder, title="Learning Curve"):
 def main():
     source_env_name = 'CustomHopper-source-v0'
     target_env_name = 'CustomHopper-target-v0'
-    algorithm = 'ppo'
-    total_timesteps = 100000
+    algorithm = 'sac'
+    total_timesteps = 1000000
     test_episodes = 5000
     randomization = True
     randomization_type = 'entropy maximization'
