@@ -50,38 +50,34 @@ class CustomHopper(MujocoEnv, utils.EzPickle):
         #print(self.sim.model.body_mass)
         
     def sample_adr_parameters(self, step, total_steps):
-        """Adjust the domain randomization parameters based on the ADR schedule"""
+        # Calculate the randomization factor
         adr_factor = self.get_adr_factor(step, total_steps)
         #print(f"Applying ADR with factor {adr_factor:.2f}")
 
         # Scale the randomization based on adr_factor
         num_links = len(self.sim.model.body_mass) - 2
+        # Sample masses from a normal distribution consideting the adr_factor
+        # The scale parameter is multiplied by adr_factor
+        # High values of adr_factor result in a wider spread of sampled masses and introduce more randomness
         sampled_masses = np.random.normal(loc=1.0, scale=0.1 * adr_factor, size=num_links)
         return sampled_masses
             
     def get_adr_factor(self, current_step, total_steps, max_factor=1.0, min_factor=0.2):
-        """
-        Get the randomization factor based on current step in training.
-        - max_factor: the randomization factor at the start (high randomization).
-        - min_factor: the randomization factor at the end (low randomization).
-        """
+        # Considering the current training step, calculate the randomization factor
+        # The factor is linearly decreased from max_factor to min_factor
+        # The high value at the beginning of training allows for exploration
+        
         # Linear decay of the randomization factor
         return max(min_factor, max_factor * (1 - current_step / total_steps))
 
     #CUSTOM DOMAIN RANDOMIZATION
     
     def set_cdr_parameters(self):
-        """Set each hopper link's mass to a new value"""
         self.set_parameters(self.sample_parameters_cdr())
         
     def sample_parameters_cdr(self):
-        """
-        Sample masses for thigh, leg, and foot based on predefined categories.
-        Categories:
-        - Light: [0.5, 0.9]
-        - Medium: [1.0, 1.4]
-        - Heavy: [1.5, 2.0]
-        """
+        # Define categories for different body parts
+        # Categories allows to sample masses for different body parts with different ranges
         categories = {
             "light": (0.5, 0.9),
             "medium": (1.0, 1.4),
@@ -103,7 +99,6 @@ class CustomHopper(MujocoEnv, utils.EzPickle):
     #DOMAIN RANDOMIZATION WITH ENTROPY MAXIMIZATION
     
     def set_doraemon_parameters(self, step, total_steps):
-        """Switch between different randomization phases."""
         # Define the phase transitions based on the training progress
         if step < 0.3 * total_steps:  # Early stage: uniform randomization
             training_phase = "uniform"
