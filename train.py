@@ -13,7 +13,7 @@ from stable_baselines3.common.evaluation import evaluate_policy
 from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.results_plotter import load_results, ts2xy
 
-def create_model_and_train(env, env_name, model_name='ppo', n_timesteps=10000, randomization=False, randomization_type='uniform'):
+def create_model_and_train(env, env_name, model_name, n_timesteps, randomization, randomization_type, label):
     log_dir = "./tmp/gym/" + env_name + "/"    
        
     if model_name == 'ppo':
@@ -31,10 +31,10 @@ def create_model_and_train(env, env_name, model_name='ppo', n_timesteps=10000, r
                 env.set_random_parameters()
             elif randomization_type == 'adaptive':
                 env.set_adr_parameters(step, n_timesteps // batch_size)
-            elif randomization_type == 'custom':
-                env.set_cdr_parameters()
-            elif randomization_type == 'entropy maximization':
-                env.set_doraemon_parameters(step, n_timesteps // batch_size)
+            elif randomization_type == 'continual':
+                env.set_cdr_parameters(progress=step/n_timesteps)
+            elif randomization_type == 'entropy regulation':
+                env.set_entropy_regulation_parameters(step, n_timesteps // batch_size, model, model_name)
             else:
                 raise ValueError('Unknown randomization type')               
             
@@ -44,11 +44,11 @@ def create_model_and_train(env, env_name, model_name='ppo', n_timesteps=10000, r
         model.learn(total_timesteps=n_timesteps)
         
     model.save(os.path.join(log_dir, "trained_model"))
-    plot_results(log_dir)
+    plot_results(log_dir, model_name, randomization_type, label)
     return model
 
-def evaluate_model(model, env, n_eval_episodes):
-    mean_reward, std_reward = evaluate_policy(model, env, n_eval_episodes=n_eval_episodes)
+def evaluate_model(model, env, n_eval_episodes, render):
+    mean_reward, std_reward = evaluate_policy(model, env, n_eval_episodes=n_eval_episodes, render=render)
     return mean_reward, std_reward
 
 def moving_average(values, window):
@@ -62,7 +62,7 @@ def moving_average(values, window):
     return np.convolve(values, weights, "valid")
 
 
-def plot_results(log_folder, title="Learning Curve"):
+def plot_results(log_folder, model_name, randomization_type, label, title="Learning Curve"):
     """
     plot the results
 
@@ -78,17 +78,17 @@ def plot_results(log_folder, title="Learning Curve"):
     plt.plot(x, y)
     plt.xlabel("Number of Timesteps")
     plt.ylabel("Rewards")
-    plt.title(title + " Smoothed")
+    plt.title(title + " " + model_name + " "+ randomization_type + " " + label )
     plt.show()
 
 def main():
     source_env_name = 'CustomHopper-source-v0'
     target_env_name = 'CustomHopper-target-v0'
-    algorithm = 'sac'
-    total_timesteps = 1000000
-    test_episodes = 5000
+    algorithm = 'ppo'
+    total_timesteps = 100000
+    test_episodes = 100
     randomization = True
-    randomization_type = 'entropy maximization'
+    randomization_type = 'adaptive'
     
     log_dir = "./tmp/gym/" + source_env_name + "/"
     os.makedirs(log_dir, exist_ok=True)
@@ -111,16 +111,16 @@ def main():
     print(target_env_name+' Dynamics parameters:', target_env.get_parameters())  # masses of each link of the Hopper
     
     print("Training on source environment...")
-    source_model = create_model_and_train(source_env,source_env_name, algorithm, total_timesteps, randomization, randomization_type)
+    source_model = create_model_and_train(source_env,source_env_name, algorithm, total_timesteps, randomization, randomization_type, label='source')
 
     print("Training on target environment...")
-    target_model = create_model_and_train(target_env,target_env_name, algorithm, total_timesteps, randomization, randomization_type)
+    target_model = create_model_and_train(target_env,target_env_name, algorithm, total_timesteps, randomization, randomization_type, label='target')
 
     print("Evaluating models...")
     results = {}
-    results['source->source'] = evaluate_model(source_model, source_env, test_episodes)
-    results['source->target'] = evaluate_model(source_model, target_env, test_episodes)
-    results['target->target'] = evaluate_model(target_model, target_env, test_episodes)
+    results['source->source'] = evaluate_model(source_model, source_env, test_episodes, render=True)
+    results['source->target'] = evaluate_model(source_model, target_env, test_episodes, render=True)
+    results['target->target'] = evaluate_model(target_model, target_env, test_episodes, render=False)
 
     print("\nResults:")
     for config, (mean, std) in results.items():

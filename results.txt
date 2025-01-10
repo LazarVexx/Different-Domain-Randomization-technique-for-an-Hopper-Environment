@@ -8,49 +8,37 @@ source->source: Mean Reward = 540.08, Std Dev = 4.94
 source->target: Mean Reward = 559.57, Std Dev = 7.85
 target->target: Mean Reward = 1139.97, Std Dev = 26.95
 
-Results SAC Uniform Domain Randomization:
-source->source: Mean Reward = 1406.29, Std Dev = 248.50
-source->target: Mean Reward = 1145.56, Std Dev = 200.57
-target->target: Mean Reward = 1441.09, Std Dev = 149.09
+Results SAC Uniform:
 
-Results PPO Uniform Domain Randomization:
-source->source: Mean Reward = 915.68, Std Dev = 3.56
-source->target: Mean Reward = 956.56, Std Dev = 21.56
-target->target: Mean Reward = 704.41, Std Dev = 3.78
 
-('world', 'torso', 'thigh', 'leg', 'foot')
+Results PPO Uniform:
+source->source: Mean Reward = 1003.62, Std Dev = 49.50
+source->target: Mean Reward = 1267.78, Std Dev = 15.83
+target->target: Mean Reward = 332.64, Std Dev = 2.34
 
-Results PPO Adaptive Domain Randomization:
-source->source: Mean Reward = 473.70, Std Dev = 23.45
-source->target: Mean Reward = 476.10, Std Dev = 51.76
-target->target: Mean Reward = 1171.74, Std Dev = 9.22
+Results SAC Adaptive:
 
-Results SAC Adaptive Domain Randomization:
-source->source: Mean Reward = 578.62, Std Dev = 57.96
-source->target: Mean Reward = 587.65, Std Dev = 44.46
-target->target: Mean Reward = 715.55, Std Dev = 27.58
 
-Results PPO Custom Domain Randomization:
-source->source: Mean Reward = 753.62, Std Dev = 4.57
-source->target: Mean Reward = 826.18, Std Dev = 5.75
-target->target: Mean Reward = 896.67, Std Dev = 7.07
+Results PPO Adaptive:
+source->source: Mean Reward = 981.17, Std Dev = 10.16
+source->target: Mean Reward = 993.18, Std Dev = 16.10
+target->target: Mean Reward = 769.75, Std Dev = 4.07
 
-Result SAC Custom Domain Randomization:
-source->source: Mean Reward = 798.28, Std Dev = 85.71
-source->target: Mean Reward = 711.84, Std Dev = 79.87
-target->target: Mean Reward = 1294.02, Std Dev = 109.99
+Results SAC Continual:
 
-Result SAC Domain Randomization with Entropy Maximization:
-source->source: Mean Reward = 1310.68, Std Dev = 35.63
-source->target: Mean Reward = 1130.53, Std Dev = 57.54
-target->target: Mean Reward = 973.06, Std Dev = 37.68
 
-Result PPO Domain Randomization with Entropy Maximization:
-source->source: Mean Reward = 753.29, Std Dev = 65.90
-source->target: Mean Reward = 780.49, Std Dev = 144.85
-target->target: Mean Reward = 887.39, Std Dev = 20.90
+Results PPO Continual:
 
-Result SAC Domain Randomization with Entropy Maximization with 1_000_000:
-source->source: Mean Reward = 2134.51, Std Dev = 42.17
-source->target: Mean Reward = 2175.13, Std Dev = 37.85
-target->target: Mean Reward = 1748.47, Std Dev = 5.87
+source->source: Mean Reward = 582.12, Std Dev = 88.99
+source->target: Mean Reward = 739.34, Std Dev = 172.01
+target->target: Mean Reward = 1308.31, Std Dev = 29.67
+
+
+Results SAC Entropy Regulation:
+
+
+
+Results PPO Entropy Regulation:
+source->source: Mean Reward = 594.14, Std Dev = 4.82
+source->target: Mean Reward = 632.01, Std Dev = 2.78
+target->target: Mean Reward = 854.05, Std Dev = 5.55

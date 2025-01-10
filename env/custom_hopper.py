@@ -29,7 +29,7 @@ class CustomHopper(MujocoEnv, utils.EzPickle):
         """Set each hopper link's mass to a new value"""
         self.sim.model.body_mass[2:] = task
         
-    #UNIFROM RANDOMIZATION
+    #UNIFORM RANDOMIZATION
     def set_random_parameters(self):
         """Set random masses
         TODO
@@ -39,43 +39,83 @@ class CustomHopper(MujocoEnv, utils.EzPickle):
     def sample_random_parameters(self):
         """Sample masses according to a domain randomization distribution
         TODO
-        """
-        num_links = len(self.sim.model.body_mass) - 2
-        sampled_masses = np.random.normal(loc=1.0, scale=0.1, size=num_links)
-        return sampled_masses
-     
+        """          
+        # Define categories for different body parts with their ranges
+        categories = {
+            "light": (0.5, 1.0),   # Range for light mass (foot)
+            "medium": (1.0, 2.0),  # Range for medium mass (leg)
+            "heavy": (1.5, 3.0),   # Range for heavy mass (thigh)
+        }
+        
+        # Assign categories to body parts
+        body_part_categories = ["medium", "heavy", "light"]  # Thigh, Leg, Foot
+        
+        # Sample masses based on the category ranges
+        sampled_masses = []
+        for category in body_part_categories:
+            low, high = categories[category]
+            sampled_mass = np.random.uniform(low, high)
+            sampled_masses.append(sampled_mass)
+        
+        return np.array(sampled_masses)
+       
     #ADAPTIVE DOMAIN RANDOMIZATION
     def set_adr_parameters(self, step, total_steps):
         self.set_parameters(self.sample_adr_parameters(step, total_steps))
         #print(self.sim.model.body_mass)
         
     def sample_adr_parameters(self, step, total_steps):
-        # Calculate the randomization factor
-        adr_factor = self.get_adr_factor(step, total_steps)
-        #print(f"Applying ADR with factor {adr_factor:.2f}")
-
-        # Scale the randomization based on adr_factor
-        num_links = len(self.sim.model.body_mass) - 2
-        # Sample masses from a normal distribution consideting the adr_factor
-        # The scale parameter is multiplied by adr_factor
-        # High values of adr_factor result in a wider spread of sampled masses and introduce more randomness
-        sampled_masses = np.random.normal(loc=1.0, scale=0.1 * adr_factor, size=num_links)
-        return sampled_masses
+        # Calculate the ADR factor (start with a high factor for exploration)
+        adr_factor = self.get_adr_factor(step, total_steps, max_factor=2.0, min_factor=1.0)
+        
+        # Define categories for different body parts with large ranges for exploration
+        categories = {
+            "light": (0.5, 1.5),   # Range for foot 
+            "medium": (1.0, 3.0),  # Range for leg 
+            "heavy": (1.5, 4.0),   # Range for thigh 
+        }
+        
+        # Sample masses based on categories
+        sampled_masses = []
+        for category in ["medium", "heavy", "light"]:
+            low, high = categories[category]
             
-    def get_adr_factor(self, current_step, total_steps, max_factor=1.0, min_factor=0.2):
-        # Considering the current training step, calculate the randomization factor
-        # The factor is linearly decreased from max_factor to min_factor
-        # The high value at the beginning of training allows for exploration
+            # Prevent the high value from becoming smaller than the low value
+            max_expansion = (high - low)
+            expanded_high = high + max_expansion * adr_factor / 2
+            
+            # Ensure that the high value doesn't go below the low value
+            expanded_high = max(expanded_high, low)
+            
+            # Sample mass within the adjusted range
+            sampled_mass = np.random.uniform(low, expanded_high)
+            sampled_masses.append(sampled_mass)
         
-        # Linear decay of the randomization factor
-        return max(min_factor, max_factor * (1 - current_step / total_steps))
+        return np.array(sampled_masses)
 
-    #CUSTOM DOMAIN RANDOMIZATION
-    
-    def set_cdr_parameters(self):
-        self.set_parameters(self.sample_parameters_cdr())
+            
+    def get_adr_factor(self, current_step, total_steps, max_factor=3.0, min_factor=1.0):
+        # Calculate the ADR factor based on the current training step
+        progress = current_step / total_steps
         
-    def sample_parameters_cdr(self):
+        # Early phase: Large ADR factor for exploration
+        if progress < 0.4:
+            adr_factor = max_factor
+        # Mid phase: Gradual reduction in ADR factor for controlled exploration
+        elif progress < 0.8:
+            adr_factor = max_factor - (max_factor - min_factor) * (progress - 0.4) / 0.4
+        # Late phase: Small ADR factor for minimal randomization
+        else:
+            adr_factor = min_factor
+        
+        return adr_factor
+
+    #Continual DOMAIN RANDOMIZATION
+    
+    def set_cdr_parameters(self, progress):
+        self.set_parameters(self.sample_parameters_cdr(progress))
+        
+    def sample_parameters_cdr(self, training_progress):
         # Define categories for different body parts
         # Categories allows to sample masses for different body parts with different ranges
         categories = {
@@ -84,6 +124,15 @@ class CustomHopper(MujocoEnv, utils.EzPickle):
             "heavy": (1.5, 2.0),
         }
         
+        # Gradually expand the ranges based on training progress (0 to 1)
+        def expand_range(base_range, progress):
+            low, high = base_range
+            range_expansion = progress * 0.2  # Adjust expansion rate as needed
+            return (low - range_expansion, high + range_expansion)
+
+        # Adjust ranges dynamically
+        categories = {k: expand_range(v, training_progress) for k, v in categories.items()}
+    
         # Assign categories to thigh, leg, and foot
         body_part_categories = ["medium", "heavy", "light"]  # Can be adjusted
         
@@ -96,23 +145,45 @@ class CustomHopper(MujocoEnv, utils.EzPickle):
         
         return np.array(sampled_masses)
     
-    #DOMAIN RANDOMIZATION WITH ENTROPY MAXIMIZATION
+    #DOMAIN RANDOMIZATION WITH ENTROPY REGULATION
     
-    def set_doraemon_parameters(self, step, total_steps):
+    def set_entropy_regulation_parameters(self, step, total_steps,model, model_name):
         # Define the phase transitions based on the training progress
-        if step < 0.3 * total_steps:  # Early stage: uniform randomization
-            training_phase = "uniform"
-        elif step < 0.6 * total_steps:  # Mid stage: adaptive randomization
+        if step < 0.4 * total_steps:  # Early stage: uniform randomization
             training_phase = "adaptive"
-        else:  # Later stage: custom randomization
-            training_phase = "custom"
+        elif step < 0.8 * total_steps:  # Mid stage: adaptive randomization
+            training_phase = "continual"
+        else:  # Later stage: continual randomization
+            training_phase = "uniform"
 
-        if training_phase == "uniform":
+        if training_phase == "adaptive":
+            #Higher alpha to improve exploration
+            if model_name == 'sac':
+                model.policy.ent_coef = 0.1 
+            elif model_name == 'ppo':
+                model.policy.ent_coef = 0.02
+                
+            total_steps_adaptive = 0.4 * total_steps
+            self.set_parameters(self.sample_adr_parameters(step, total_steps_adaptive))
+                           
+        elif training_phase == "continual":
+            #Lower alpha to reduce exploration
+            if model_name == 'sac':
+                model.policy.ent_coef = 0.05
+            elif model_name == 'ppo':
+                model.policy.ent_coef = 0.01
+            
+            self.set_parameters(self.sample_parameters_cdr(training_progress=step/total_steps))
+        
+        elif training_phase == "uniform":
+            if model_name == 'sac':
+                model.policy.ent_coef = 'auto'
+            elif model_name == 'ppo':
+                model.policy.ent_coef = 0.005
+            
             self.set_parameters(self.sample_random_parameters())
-        elif training_phase == "adaptive":
-            self.set_parameters(self.sample_adr_parameters(step, total_steps))
-        elif training_phase == "custom":
-            self.set_parameters(self.sample_parameters_cdr())
+            
+            
         else:
             raise ValueError(f"Unknown training_phase: {training_phase}")
     
