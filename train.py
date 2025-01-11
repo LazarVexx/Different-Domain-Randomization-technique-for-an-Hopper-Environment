@@ -97,11 +97,11 @@ def plot_results(log_folder, model_name, randomization_type, label, randomizatio
 def main():
     source_env_name = 'CustomHopper-source-v0'
     target_env_name = 'CustomHopper-target-v0'
-    algorithm = 'ppo'
+    algorithm = 'sac'
     total_timesteps = 250000
     test_episodes = 100
     randomization = True
-    randomization_type = 'dynamic exploration'
+    randomization_type = 'uniform'
     
     log_dir = "./tmp/gym/" + source_env_name + "/"
     os.makedirs(log_dir, exist_ok=True)

@@ -1,14 +1,17 @@
 Results SAC no randomization:
-
-
+source->source: Mean Reward = 1245.45, Std Dev = 53.04
+source->target: Mean Reward = 1109.39, Std Dev = 70.13
+target->target: Mean Reward = 1656.45, Std Dev = 116.75
 
 Result PPO no randomization:
-
 source->source: Mean Reward = 1319.98, Std Dev = 229.10
 source->target: Mean Reward = 680.68, Std Dev = 11.35
 target->target: Mean Reward = 1268.77, Std Dev = 214.69
 
 Result SAC Uniform Randomization:
+source->source: Mean Reward = 871.41, Std Dev = 45.61
+source->target: Mean Reward = 648.01, Std Dev = 4.95
+target->target: Mean Reward = 415.55, Std Dev = 3.49
 
 
 Result PPO Uniform Randomization:
