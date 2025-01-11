@@ -1,44 +1,50 @@
-Results SAC without randomization:
-source->source: Mean Reward = 303.74, Std Dev = 3.58
-source->target: Mean Reward = 311.59, Std Dev = 4.35
-target->target: Mean Reward = 325.37, Std Dev = 5.37
-
-Results PPO without randomization:
-source->source: Mean Reward = 540.08, Std Dev = 4.94
-source->target: Mean Reward = 559.57, Std Dev = 7.85
-target->target: Mean Reward = 1139.97, Std Dev = 26.95
-
-Results SAC Uniform:
-
-
-Results PPO Uniform:
-source->source: Mean Reward = 1003.62, Std Dev = 49.50
-source->target: Mean Reward = 1267.78, Std Dev = 15.83
-target->target: Mean Reward = 332.64, Std Dev = 2.34
-
-Results SAC Adaptive:
-
-
-Results PPO Adaptive:
-source->source: Mean Reward = 981.17, Std Dev = 10.16
-source->target: Mean Reward = 993.18, Std Dev = 16.10
-target->target: Mean Reward = 769.75, Std Dev = 4.07
-
-Results SAC Continual:
-
-
-Results PPO Continual:
-
-source->source: Mean Reward = 582.12, Std Dev = 88.99
-source->target: Mean Reward = 739.34, Std Dev = 172.01
-target->target: Mean Reward = 1308.31, Std Dev = 29.67
-
-
-Results SAC Entropy Regulation:
+Results SAC no randomization:
 
 
 
-Results PPO Entropy Regulation:
-source->source: Mean Reward = 594.14, Std Dev = 4.82
-source->target: Mean Reward = 632.01, Std Dev = 2.78
-target->target: Mean Reward = 854.05, Std Dev = 5.55
+Result PPO no randomization:
+
+source->source: Mean Reward = 1319.98, Std Dev = 229.10
+source->target: Mean Reward = 680.68, Std Dev = 11.35
+target->target: Mean Reward = 1268.77, Std Dev = 214.69
+
+Result SAC Uniform Randomization:
+
+
+Result PPO Uniform Randomization:
+source->source: Mean Reward = 1408.03, Std Dev = 43.86
+source->target: Mean Reward = 1388.90, Std Dev = 191.31
+target->target: Mean Reward = 872.79, Std Dev = 10.77
+
+
+Result SAC REDUCING RANGES DOMAIN RANDOMIZATION
+
+
+Result PPO REDUCING RANGES DOMAIN RANDOMIZATION
+
+
+Result SAC INCREMENTAL RANGES EXPANSION DOMAIN RANDOMIZATION
+
+
+Result PPO INCREMENTAL RANGES EXPANSION DOMAIN RANDOMIZATION
+
+
+Result SAC Exploration-Uniform Domain Randomization:
+
+
+Result PPO Exploration-Uniform Domain Randomization:
+
+
+Result SAC Dynamic Range Cycle Domain Randomization:
+
+
+Result PPO Dynamic Range Cycle Domain Randomization:
+source->source: Mean Reward = 1532.42, Std Dev = 17.32
+source->target: Mean Reward = 1519.38, Std Dev = 181.27
+target->target: Mean Reward = 1580.80, Std Dev = 37.97
+
+
+Result SAC Dynamic Exploration Domain Randomization:
+
+
+Result PPO Dynamic Exploration Domain Randomization:

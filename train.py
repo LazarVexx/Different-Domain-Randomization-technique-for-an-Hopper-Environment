@@ -28,13 +28,23 @@ def create_model_and_train(env, env_name, model_name, n_timesteps, randomization
         batch_size = model.n_steps if model_name=='ppo' else 1 ## For PPO with Uniform Domain Randomization
         for step in range(n_timesteps // batch_size):
             if randomization_type == 'uniform':
+                #Uniform Domain Randomization
                 env.set_random_parameters()
-            elif randomization_type == 'adaptive':
-                env.set_adr_parameters(step, n_timesteps // batch_size)
-            elif randomization_type == 'continual':
-                env.set_cdr_parameters(progress=step/n_timesteps)
-            elif randomization_type == 'entropy regulation':
-                env.set_entropy_regulation_parameters(step, n_timesteps // batch_size, model, model_name)
+            elif randomization_type == 'reducing':
+                #REDUCING RANGES DOMAIN RANDOMIZATION
+                env.set_rrdr_parameters(step, n_timesteps // batch_size)
+            elif randomization_type == 'incremental':
+                #INCREMENTAL RANGES EXPANSION DOMAIN RANDOMIZATION
+                env.set_ire_parameters(progress=step/n_timesteps)
+            elif randomization_type == 'exploration-uniform':
+                #Exploration-Uniform Domain Randomization
+                env.set_eudr_parameters(step, n_timesteps // batch_size, model, model_name)
+            elif randomization_type == 'dynamic range cycle':
+                 ## Dynamic Range Cycle Domain Randomization
+                env.set_drc_parameters(step, n_timesteps // batch_size, model, model_name)
+            elif randomization_type == 'dynamic exploration':
+                ## Dynamic Exploration Domain Randomization
+                env.set_dedr_parameters(step, n_timesteps // batch_size, model, model_name)
             else:
                 raise ValueError('Unknown randomization type')               
             
@@ -44,7 +54,7 @@ def create_model_and_train(env, env_name, model_name, n_timesteps, randomization
         model.learn(total_timesteps=n_timesteps)
         
     model.save(os.path.join(log_dir, "trained_model"))
-    plot_results(log_dir, model_name, randomization_type, label)
+    plot_results(log_dir, model_name, randomization_type, label, randomization)
     return model
 
 def evaluate_model(model, env, n_eval_episodes, render):
@@ -62,7 +72,7 @@ def moving_average(values, window):
     return np.convolve(values, weights, "valid")
 
 
-def plot_results(log_folder, model_name, randomization_type, label, title="Learning Curve"):
+def plot_results(log_folder, model_name, randomization_type, label, randomization,  title="Learning Curve"):
     """
     plot the results
 
@@ -78,17 +88,20 @@ def plot_results(log_folder, model_name, randomization_type, label, title="Learn
     plt.plot(x, y)
     plt.xlabel("Number of Timesteps")
     plt.ylabel("Rewards")
-    plt.title(title + " " + model_name + " "+ randomization_type + " " + label )
+    if randomization:
+        plt.title(title + " " + model_name + " "+ randomization_type + " " + label )
+    else:
+        plt.title(title + " without randomization")
     plt.show()
 
 def main():
     source_env_name = 'CustomHopper-source-v0'
     target_env_name = 'CustomHopper-target-v0'
     algorithm = 'ppo'
-    total_timesteps = 100000
+    total_timesteps = 250000
     test_episodes = 100
     randomization = True
-    randomization_type = 'adaptive'
+    randomization_type = 'reducing'
     
     log_dir = "./tmp/gym/" + source_env_name + "/"
     os.makedirs(log_dir, exist_ok=True)

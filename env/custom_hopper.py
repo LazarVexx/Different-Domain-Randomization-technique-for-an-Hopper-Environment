@@ -16,7 +16,7 @@ class CustomHopper(MujocoEnv, utils.EzPickle):
         utils.EzPickle.__init__(self)
 
         self.original_masses = np.copy(self.sim.model.body_mass[1:])    # Default link masses
-
+        
         if domain == 'source':  # Source environment has an imprecise torso mass (1kg shift)
             self.sim.model.body_mass[1] -= 1.0
 
@@ -42,13 +42,13 @@ class CustomHopper(MujocoEnv, utils.EzPickle):
         """          
         # Define categories for different body parts with their ranges
         categories = {
-            "light": (0.5, 1.0),   # Range for light mass (foot)
-            "medium": (1.0, 2.0),  # Range for medium mass (leg)
-            "heavy": (1.5, 3.0),   # Range for heavy mass (thigh)
+            "Thigh": (self.original_masses[1] - 0.2, self.original_masses[1] + 0.2),   # Range for light mass (foot)
+            "Leg": (self.original_masses[2] -0.2, self.original_masses[2] + 0.2),  # Range for medium mass (leg)
+            "Foot": (self.original_masses[3]-0.2, self.original_masses[3] + 0.2),   # Range for heavy mass (thigh)
         }
-        
+               
         # Assign categories to body parts
-        body_part_categories = ["medium", "heavy", "light"]  # Thigh, Leg, Foot
+        body_part_categories = ["Thigh", "Leg", "Foot"]
         
         # Sample masses based on the category ranges
         sampled_masses = []
@@ -59,133 +59,276 @@ class CustomHopper(MujocoEnv, utils.EzPickle):
         
         return np.array(sampled_masses)
        
-    #ADAPTIVE DOMAIN RANDOMIZATION
-    def set_adr_parameters(self, step, total_steps):
-        self.set_parameters(self.sample_adr_parameters(step, total_steps))
+    #REDUCING RANGES DOMAIN RANDOMIZATION
+    def set_rrdr_parameters(self, step, total_steps):
+        self.set_parameters(self.sample_rrdr_parameters(step, total_steps))
         #print(self.sim.model.body_mass)
         
-    def sample_adr_parameters(self, step, total_steps):
+    def sample_rrdr_parameters(self, step, total_steps):
         # Calculate the ADR factor (start with a high factor for exploration)
-        adr_factor = self.get_adr_factor(step, total_steps, max_factor=2.0, min_factor=1.0)
+        rrdr_factor = self.get_rrdr_factor(step, total_steps, max_factor=0.5, min_factor=0.0)
         
-        # Define categories for different body parts with large ranges for exploration
+        # Define categories for different body parts with large ranges for exploration ( max - min distanze = 0.7)
         categories = {
-            "light": (0.5, 1.5),   # Range for foot 
-            "medium": (1.0, 3.0),  # Range for leg 
-            "heavy": (1.5, 4.0),   # Range for thigh 
+            "Thigh": (self.original_masses[1] - 0.2, self.original_masses[1] + 0.2),   # Range for light mass (foot)
+            "Leg": (self.original_masses[2] -0.2, self.original_masses[2] + 0.2),  # Range for medium mass (leg)
+            "Foot": (self.original_masses[3]-0.2, self.original_masses[3] + 0.2),   # Range for heavy mass (thigh)
         }
-        
+        training_progress = step / total_steps
+        # Assign categories to body parts
+        body_part_categories = ["Thigh", "Leg", "Foot"]
         # Sample masses based on categories
         sampled_masses = []
-        for category in ["medium", "heavy", "light"]:
+        for category in body_part_categories:
+            
             low, high = categories[category]
             
-            # Prevent the high value from becoming smaller than the low value
-            max_expansion = (high - low)
-            expanded_high = high + max_expansion * adr_factor / 2
-            
-            # Ensure that the high value doesn't go below the low value
-            expanded_high = max(expanded_high, low)
-            
-            # Sample mass within the adjusted range
-            sampled_mass = np.random.uniform(low, expanded_high)
+            expanded_high = high + rrdr_factor
+                        
+            mean_value = (low + expanded_high) / 2
+            sampled_mass = np.random.normal(loc=mean_value, scale=(1-training_progress))
             sampled_masses.append(sampled_mass)
         
         return np.array(sampled_masses)
 
             
-    def get_adr_factor(self, current_step, total_steps, max_factor=3.0, min_factor=1.0):
+    def get_rrdr_factor(self, current_step, total_steps, max_factor, min_factor):
         # Calculate the ADR factor based on the current training step
         progress = current_step / total_steps
         
         # Early phase: Large ADR factor for exploration
-        if progress < 0.4:
-            adr_factor = max_factor
+        if progress < 0.2:
+            rrdr_factor = max_factor
         # Mid phase: Gradual reduction in ADR factor for controlled exploration
         elif progress < 0.8:
-            adr_factor = max_factor - (max_factor - min_factor) * (progress - 0.4) / 0.4
-        # Late phase: Small ADR factor for minimal randomization
+            #rrdr_factor = max_factor - (max_factor - min_factor) * progress
+            rrdr_factor = max_factor - (max_factor - min_factor) * np.log1p(progress)
+        # Late phase: Small ADR factor 
         else:
-            adr_factor = min_factor
+            rrdr_factor = min_factor 
         
-        return adr_factor
+        return rrdr_factor
 
-    #Continual DOMAIN RANDOMIZATION
+    #INCREMENTAL RANGES EXPANSION DOMAIN RANDOMIZATION
     
-    def set_cdr_parameters(self, progress):
-        self.set_parameters(self.sample_parameters_cdr(progress))
+    def set_ire_parameters(self, progress):
+        self.set_parameters(self.sample_parameters_ire(progress))
         
-    def sample_parameters_cdr(self, training_progress):
+    def sample_parameters_ire(self, training_progress):
         # Define categories for different body parts
         # Categories allows to sample masses for different body parts with different ranges
         categories = {
-            "light": (0.5, 0.9),
-            "medium": (1.0, 1.4),
-            "heavy": (1.5, 2.0),
+            "Thigh": (self.original_masses[1] - 0.2, self.original_masses[1] + 0.2),   # Range for light mass (foot)
+            "Leg": (self.original_masses[2] -0.2, self.original_masses[2] + 0.2),  # Range for medium mass (leg)
+            "Foot": (self.original_masses[3]-0.2, self.original_masses[3] + 0.2),   # Range for heavy mass (thigh)
         }
+               
+        # Assign categories to body parts
+        body_part_categories = ["Thigh", "Leg", "Foot"]
         
         # Gradually expand the ranges based on training progress (0 to 1)
         def expand_range(base_range, progress):
             low, high = base_range
-            range_expansion = progress * 0.2  # Adjust expansion rate as needed
-            return (low - range_expansion, high + range_expansion)
+            range_expansion = np.log1p(progress) * 0.5  # Adjust expansion rate as needed
+            return (low, high + range_expansion)
 
         # Adjust ranges dynamically
         categories = {k: expand_range(v, training_progress) for k, v in categories.items()}
-    
-        # Assign categories to thigh, leg, and foot
-        body_part_categories = ["medium", "heavy", "light"]  # Can be adjusted
-        
+            
         # Sample masses based on category ranges
         sampled_masses = []
         for category in body_part_categories:
             low, high = categories[category]
-            sampled_mass = np.random.uniform(low, high)
+            mean_value = (low + high) / 2
+            sampled_mass = np.random.normal(loc=mean_value, scale=(1-training_progress))
             sampled_masses.append(sampled_mass)
         
         return np.array(sampled_masses)
+        
+    #Exploration-Uniform Domain Randomization
     
-    #DOMAIN RANDOMIZATION WITH ENTROPY REGULATION
-    
-    def set_entropy_regulation_parameters(self, step, total_steps,model, model_name):
+    def set_eudr_parameters(self, step, total_steps,model, model_name):
         # Define the phase transitions based on the training progress
-        if step < 0.4 * total_steps:  # Early stage: uniform randomization
-            training_phase = "adaptive"
-        elif step < 0.8 * total_steps:  # Mid stage: adaptive randomization
-            training_phase = "continual"
-        else:  # Later stage: continual randomization
-            training_phase = "uniform"
+        uniform_ratio = 0.3
+        increment_ratio = 0.4
+        reducing_ratio = 0.3
 
-        if training_phase == "adaptive":
-            #Higher alpha to improve exploration
+        # Compute boundaries for each phase
+        uniform_steps = uniform_ratio * total_steps
+        increment_steps = increment_ratio * total_steps
+        reducing_steps = reducing_ratio * total_steps
+        
+        if step < increment_steps:  # Early stage: increment randomization to explore near the range of uniform
+            training_phase = "increment"
+            phase_step = step
+            phase_total_steps = increment_steps
+        elif step < reducing_steps + increment_steps:  # Mid stage: reducing randomization that has larger ranges and allows to explore more
+            training_phase = "reducing"
+            phase_step = step - increment_steps
+            phase_total_steps = reducing_steps
+        else:  # Later stage: uniform randomization to exploit the learned policy
+            training_phase = "uniform"
+            phase_step = step - reducing_steps - increment_steps
+            phase_total_steps = uniform_steps
+
+         # Calculate normalized progress within the phase
+        phase_progress = phase_step / phase_total_steps
+
+        if training_phase == "increment":
+            # Higher alpha to improve exploration
             if model_name == 'sac':
-                model.policy.ent_coef = 0.1 
+                model.policy.ent_coef = 0.1
             elif model_name == 'ppo':
                 model.policy.ent_coef = 0.02
-                
-            total_steps_adaptive = 0.4 * total_steps
-            self.set_parameters(self.sample_adr_parameters(step, total_steps_adaptive))
-                           
-        elif training_phase == "continual":
-            #Lower alpha to reduce exploration
+
+            self.set_parameters(self.sample_parameters_ire(training_progress=phase_progress))
+
+        elif training_phase == "reducing":
+            # Medium alpha to reduce exploration
             if model_name == 'sac':
                 model.policy.ent_coef = 0.05
             elif model_name == 'ppo':
                 model.policy.ent_coef = 0.01
-            
-            self.set_parameters(self.sample_parameters_cdr(training_progress=step/total_steps))
-        
+
+            self.set_parameters(self.sample_rrdr_parameters(phase_step, phase_total_steps))
+
         elif training_phase == "uniform":
+            # Lower alpha to encourage exploitation
             if model_name == 'sac':
                 model.policy.ent_coef = 'auto'
             elif model_name == 'ppo':
                 model.policy.ent_coef = 0.005
-            
+
             self.set_parameters(self.sample_random_parameters())
-            
-            
+
         else:
             raise ValueError(f"Unknown training_phase: {training_phase}")
+        
+        
+    ## Dynamic Range Cycle Domain Randomization
+    def set_drc_parameters(self, step, total_steps, model, model_name):
+        # Define phase proportions
+        uniform_ratio = 0.2
+        increment_ratio = 0.4
+        reducing_ratio = 0.4
+
+        # Compute boundaries for each phase
+        uniform_steps = uniform_ratio * total_steps
+        increment_steps = increment_ratio * total_steps
+        reducing_steps = reducing_ratio * total_steps
+        
+        # Determine the current phase and normalize the step
+        if step < uniform_steps:  # Early stage: uniform randomization to explore near the range of uniform
+            training_phase = "uniform"
+            phase_step = step  
+            phase_total_steps = uniform_steps
+            print("uniform")
+        elif step < uniform_steps + increment_steps:  # Mid stage: increment randomization to explore more
+            training_phase = "increment"
+            phase_step = step - uniform_steps  
+            phase_total_steps = increment_steps
+            print("increment")
+        else:  # Later stage: reducing randomization to reduce ranges to a size that is a less bigger than the initial ranges
+            training_phase = "reducing"
+            phase_step = step - uniform_steps - increment_steps  
+            phase_total_steps = reducing_steps
+            print("reducing")
+
+        # Calculate normalized progress within the phase
+        phase_progress = phase_step / phase_total_steps
+
+        # Set parameters based on the phase
+        if training_phase == "increment":
+            # Higher alpha to improve exploration
+            if model_name == 'sac':
+                model.policy.ent_coef = 0.15
+            elif model_name == 'ppo':
+                model.policy.ent_coef = 0.03
+
+            self.set_parameters(self.sample_parameters_ire(training_progress=phase_progress))
+
+        elif training_phase == "reducing":
+            # Medium alpha to reduce exploration
+            if model_name == 'sac':
+                model.policy.ent_coef = 'auto'
+            elif model_name == 'ppo':
+                model.policy.ent_coef = 0.005
+
+            self.set_parameters(self.sample_rrdr_parameters(phase_step, phase_total_steps))
+
+        elif training_phase == "uniform":
+            # Lower alpha to encourage exploitation
+            if model_name == 'sac':
+                model.policy.ent_coef = 0.1
+            elif model_name == 'ppo':
+                model.policy.ent_coef = 0.02
+
+            self.set_parameters(self.sample_random_parameters())
+
+        else:
+            raise ValueError(f"Unknown training_phase: {training_phase}")
+        
+        
+    ## Dynamic Exploration Domain Randomization
+    def set_dedr_parameters(self, step, total_steps, model, model_name):
+        # Define phase proportions
+        uniform_ratio = 0.3
+        increment_ratio = 0.3
+        reducing_ratio = 0.4
+
+        # Compute boundaries for each phase
+        uniform_steps = uniform_ratio * total_steps
+        increment_steps = increment_ratio * total_steps
+        reducing_steps = reducing_ratio * total_steps
+        
+        # Determine the current phase and normalize the step
+        if step < reducing_steps:  # Early stage: reducing randomization to have larger ranges at the beginning and improve exploration
+            training_phase = "reducing"
+            phase_step = step  
+            phase_total_steps = reducing_steps
+        elif step < uniform_steps + reducing_steps:  # Mid stage: Uniform randomization to reduce ranges to a size that is a less bigger than the initial ranges
+            training_phase = "uniform"
+            phase_step = step - reducing_steps
+            phase_total_steps = uniform_steps
+        else:  # Later stage: increment randomization to explore more in a range near to the previous uniform range
+            training_phase = "increment"
+            phase_step = step - uniform_steps - reducing_steps 
+            phase_total_steps = increment_steps
+
+        # Calculate normalized progress within the phase
+        phase_progress = phase_step / phase_total_steps
+
+        # Set parameters based on the phase
+        if training_phase == "increment":
+            # Medium alpha to improve exploration at the end
+            if model_name == 'sac':
+                model.policy.ent_coef = 0.05
+            elif model_name == 'ppo':
+                model.policy.ent_coef = 0.01
+
+            self.set_parameters(self.sample_parameters_ire(training_progress=phase_progress))
+
+        elif training_phase == "reducing":
+            # Higher alpha to improve exploration at the start
+            if model_name == 'sac':
+                model.policy.ent_coef = 0.1
+            elif model_name == 'ppo':
+                model.policy.ent_coef = 0.02
+
+            self.set_parameters(self.sample_rrdr_parameters(phase_step, phase_total_steps))
+
+        elif training_phase == "uniform":
+            # Lower alpha to encourage exploitation
+            if model_name == 'sac':
+                model.policy.ent_coef = 0.05
+            elif model_name == 'ppo':
+                model.policy.ent_coef = 0.01
+
+            self.set_parameters(self.sample_random_parameters())
+
+        else:
+            raise ValueError(f"Unknown training_phase: {training_phase}")
+        
     
         
     def step(self, a):
