@@ -20,7 +20,10 @@ target->target: Mean Reward = 872.79, Std Dev = 10.77
 Result SAC REDUCING RANGES DOMAIN RANDOMIZATION
 
 
-Result PPO REDUCING RANGES DOMAIN RANDOMIZATION
+Result PPO REDUCING RANGES DOMAIN RANDOMIZATION:
+source->source: Mean Reward = 1524.11, Std Dev = 76.85
+source->target: Mean Reward = 1376.73, Std Dev = 247.33
+target->target: Mean Reward = 964.53, Std Dev = 230.16
 
 
 Result SAC INCREMENTAL RANGES EXPANSION DOMAIN RANDOMIZATION
@@ -28,12 +31,18 @@ Result SAC INCREMENTAL RANGES EXPANSION DOMAIN RANDOMIZATION
 
 Result PPO INCREMENTAL RANGES EXPANSION DOMAIN RANDOMIZATION
 
+source->source: Mean Reward = 1196.54, Std Dev = 294.40
+source->target: Mean Reward = 1031.03, Std Dev = 89.09
+target->target: Mean Reward = 1383.46, Std Dev = 189.42
+
 
 Result SAC Exploration-Uniform Domain Randomization:
 
 
 Result PPO Exploration-Uniform Domain Randomization:
-
+source->source: Mean Reward = 1403.84, Std Dev = 1.73
+source->target: Mean Reward = 1482.32, Std Dev = 5.62
+target->target: Mean Reward = 1493.53, Std Dev = 34.60
 
 Result SAC Dynamic Range Cycle Domain Randomization:
 
@@ -48,3 +57,6 @@ Result SAC Dynamic Exploration Domain Randomization:
 
 
 Result PPO Dynamic Exploration Domain Randomization:
+source->source: Mean Reward = 1351.65, Std Dev = 2.41
+source->target: Mean Reward = 1400.56, Std Dev = 3.51
+target->target: Mean Reward = 1582.38, Std Dev = 82.53

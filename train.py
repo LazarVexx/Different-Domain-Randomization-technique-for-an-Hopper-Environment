@@ -101,7 +101,7 @@ def main():
     total_timesteps = 250000
     test_episodes = 100
     randomization = True
-    randomization_type = 'reducing'
+    randomization_type = 'dynamic exploration'
     
     log_dir = "./tmp/gym/" + source_env_name + "/"
     os.makedirs(log_dir, exist_ok=True)
