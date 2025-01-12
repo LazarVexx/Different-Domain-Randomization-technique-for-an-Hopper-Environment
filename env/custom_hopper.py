@@ -222,17 +222,15 @@ class CustomHopper(MujocoEnv, utils.EzPickle):
             training_phase = "uniform"
             phase_step = step  
             phase_total_steps = uniform_steps
-            print("uniform")
+
         elif step < uniform_steps + increment_steps:  # Mid stage: increment randomization to explore more
             training_phase = "increment"
             phase_step = step - uniform_steps  
             phase_total_steps = increment_steps
-            print("increment")
         else:  # Later stage: reducing randomization to reduce ranges to a size that is a less bigger than the initial ranges
             training_phase = "reducing"
             phase_step = step - uniform_steps - increment_steps  
             phase_total_steps = reducing_steps
-            print("reducing")
 
         # Calculate normalized progress within the phase
         phase_progress = phase_step / phase_total_steps
