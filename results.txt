@@ -13,22 +13,30 @@ source->source: Mean Reward = 871.41, Std Dev = 45.61
 source->target: Mean Reward = 648.01, Std Dev = 4.95
 target->target: Mean Reward = 415.55, Std Dev = 3.49
 
-Large:
+Medium:
 source->source: Mean Reward = 1557.56, Std Dev = 18.36
 source->target: Mean Reward = 1459.58, Std Dev = 142.15
 target->target: Mean Reward = 1463.26, Std Dev = 2.08
 
+Large:
+source->source: Mean Reward = 718.15, Std Dev = 66.19
+source->target: Mean Reward = 735.93, Std Dev = 44.44
+target->target: Mean Reward = 1176.75, Std Dev = 273.61
 
 Result PPO Uniform Randomization:
 source->source: Mean Reward = 1408.03, Std Dev = 43.86
 source->target: Mean Reward = 1388.90, Std Dev = 191.31
 target->target: Mean Reward = 872.79, Std Dev = 10.77
 
-Large:
+Medium:
 source->source: Mean Reward = 935.47, Std Dev = 82.87
 source->target: Mean Reward = 746.77, Std Dev = 51.19
 target->target: Mean Reward = 1048.83, Std Dev = 248.37
 
+Large:
+source->source: Mean Reward = 811.97, Std Dev = 70.98
+source->target: Mean Reward = 1086.12, Std Dev = 57.55
+target->target: Mean Reward = 1502.40, Std Dev = 35.66
 
 Result SAC REDUCING RANGES DOMAIN RANDOMIZATION
 source->source: Mean Reward = 1560.95, Std Dev = 6.42

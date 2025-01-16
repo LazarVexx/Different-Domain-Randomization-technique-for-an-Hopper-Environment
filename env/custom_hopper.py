@@ -41,11 +41,13 @@ class CustomHopper(MujocoEnv, utils.EzPickle):
         TODO
         """          
         # Define categories for different body parts with their ranges
-        # Large was tested on 0.8
+        # Small ranges 0.2
+        # Medium ranges  0.8
+        # Large ranges 1.5
         categories = {
-            "Thigh": (self.original_masses[1] - 0.2, self.original_masses[1] + 0.2),   # Range for light mass (foot)
-            "Leg": (self.original_masses[2] -0.2, self.original_masses[2] + 0.2),  # Range for medium mass (leg)
-            "Foot": (self.original_masses[3]-0.2, self.original_masses[3] + 0.2),   # Range for heavy mass (thigh)
+            "Thigh": (self.original_masses[1] - 1.5, self.original_masses[1] + 1.5),   # Range for light mass (foot)
+            "Leg": (self.original_masses[2] -1.5, self.original_masses[2] + 1.5),  # Range for medium mass (leg)
+            "Foot": (self.original_masses[3]-1.5, self.original_masses[3] + 1.5),   # Range for heavy mass (thigh)
         }
                
         # Assign categories to body parts
