@@ -8,17 +8,19 @@
 \citation{Hofer2020}
 \citation{Tobin2017}
 \citation{Peng2018}
-\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
 \citation{Haarnoja2018}
 \citation{Schulman2017}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
 \citation{Peng2018}
 \citation{Tobin2017}
 \citation{Peng2018}
+\citation{Kormushev2013}
+\citation{Hofer2020}
 \citation{Haarnoja2018}
-\citation{Schulman2017}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{2}{section.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}A. Simulation-to-Real Transfer in Robotics}{2}{subsection.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}B. Soft Actor-Critic and Proximal Policy Optimization}{2}{subsection.2.2}\protected@file@percent }
+\citation{Schulman2017}
 \citation{Tobin2017}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}C. Uniform Domain Randomization}{3}{subsection.2.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3}Methodology}{3}{section.3}\protected@file@percent }
@@ -27,7 +29,7 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Domain Randomization Techniques}{5}{subsection.3.3}\protected@file@percent }
 \citation{Akkaya2020}
 \citation{Akkaya2020}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{8}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Experiments and Results}{8}{section.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Without Domain Randomization}{8}{subsection.4.1}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Figure 1. SAC Source Domain without DR}}{9}{figure.1}\protected@file@percent }
 \newlabel{fig:sac_source_no_dr}{{1}{9}{Figure 1. SAC Source Domain without DR}{figure.1}{}}
@@ -50,64 +52,84 @@
 \newlabel{fig:ppo_target_udr}{{8}{11}{Figure 8. PPO Target Domain with UDR}{figure.8}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Results of SAC and PPO with Uniform Domain Randomization.}}{11}{table.2}\protected@file@percent }
 \newlabel{tab:results_udr}{{2}{11}{Results of SAC and PPO with Uniform Domain Randomization}{table.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Reducing Ranged Domain Randomization (RRDR)}{13}{subsection.4.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Figure 9. SAC Source Domain with RRDR}}{13}{figure.9}\protected@file@percent }
-\newlabel{fig:sac_source_rrdr}{{9}{13}{Figure 9. SAC Source Domain with RRDR}{figure.9}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Figure 10. SAC Target Domain with RRDR}}{13}{figure.10}\protected@file@percent }
-\newlabel{fig:sac_target_rrdr}{{10}{13}{Figure 10. SAC Target Domain with RRDR}{figure.10}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Figure 11. PPO Source Domain with RRDR}}{13}{figure.11}\protected@file@percent }
-\newlabel{fig:ppo_source_rrdr}{{11}{13}{Figure 11. PPO Source Domain with RRDR}{figure.11}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Figure 12. PPO Target Domain with RRDR}}{13}{figure.12}\protected@file@percent }
-\newlabel{fig:ppo_target_rrdr}{{12}{13}{Figure 12. PPO Target Domain with RRDR}{figure.12}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Results of SAC and PPO with Reducing Ranged Domain Randomization.}}{13}{table.3}\protected@file@percent }
-\newlabel{tab:results_rrdr}{{3}{13}{Results of SAC and PPO with Reducing Ranged Domain Randomization}{table.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Incremental Ranges Expansion Domain Randomization (IRE)}{14}{subsection.4.4}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Figure 13. SAC Source Domain with IRE}}{15}{figure.13}\protected@file@percent }
-\newlabel{fig:sac_source_ire}{{13}{15}{Figure 13. SAC Source Domain with IRE}{figure.13}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Figure 14. SAC Target Domain with IRE}}{15}{figure.14}\protected@file@percent }
-\newlabel{fig:sac_target_ire}{{14}{15}{Figure 14. SAC Target Domain with IRE}{figure.14}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Figure 15. PPO Source Domain with IRE}}{15}{figure.15}\protected@file@percent }
-\newlabel{fig:ppo_source_ire}{{15}{15}{Figure 15. PPO Source Domain with IRE}{figure.15}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Figure 16. PPO Target Domain with IRE}}{15}{figure.16}\protected@file@percent }
-\newlabel{fig:ppo_target_ire}{{16}{15}{Figure 16. PPO Target Domain with IRE}{figure.16}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Results of SAC and PPO with Incremental Ranges Expansion Domain Randomization.}}{15}{table.4}\protected@file@percent }
-\newlabel{tab:results_ire}{{4}{15}{Results of SAC and PPO with Incremental Ranges Expansion Domain Randomization}{table.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Exploration Uniform Domain Randomization (EUDR)}{16}{subsection.4.5}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Figure 17. SAC Source Domain with EUDR}}{17}{figure.17}\protected@file@percent }
-\newlabel{fig:sac_source_eudr}{{17}{17}{Figure 17. SAC Source Domain with EUDR}{figure.17}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Figure 18. SAC Target Domain with EUDR}}{17}{figure.18}\protected@file@percent }
-\newlabel{fig:sac_target_eudr}{{18}{17}{Figure 18. SAC Target Domain with EUDR}{figure.18}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Figure 19. PPO Source Domain with EUDR}}{17}{figure.19}\protected@file@percent }
-\newlabel{fig:ppo_source_eudr}{{19}{17}{Figure 19. PPO Source Domain with EUDR}{figure.19}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces Figure 20. PPO Target Domain with EUDR}}{17}{figure.20}\protected@file@percent }
-\newlabel{fig:ppo_target_eudr}{{20}{17}{Figure 20. PPO Target Domain with EUDR}{figure.20}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Results of SAC and PPO with Exploration Uniform Domain Randomization.}}{17}{table.5}\protected@file@percent }
-\newlabel{tab:results_eudr}{{5}{17}{Results of SAC and PPO with Exploration Uniform Domain Randomization}{table.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Dynamic Range Cycle Domain Randomization (DRC)}{18}{subsection.4.6}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces Figure 21. SAC Source Domain with DRC}}{19}{figure.21}\protected@file@percent }
-\newlabel{fig:sac_source_drc}{{21}{19}{Figure 21. SAC Source Domain with DRC}{figure.21}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces Figure 22. SAC Target Domain with DRC}}{19}{figure.22}\protected@file@percent }
-\newlabel{fig:sac_target_drc}{{22}{19}{Figure 22. SAC Target Domain with DRC}{figure.22}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces Figure 23. PPO Source Domain with DRC}}{19}{figure.23}\protected@file@percent }
-\newlabel{fig:ppo_source_drc}{{23}{19}{Figure 23. PPO Source Domain with DRC}{figure.23}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces Figure 24. PPO Target Domain with DRC}}{19}{figure.24}\protected@file@percent }
-\newlabel{fig:ppo_target_drc}{{24}{19}{Figure 24. PPO Target Domain with DRC}{figure.24}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Results of SAC and PPO with Dynamic Range Cycle Domain Randomization.}}{19}{table.6}\protected@file@percent }
-\newlabel{tab:results_drc}{{6}{19}{Results of SAC and PPO with Dynamic Range Cycle Domain Randomization}{table.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.7}Dynamic Exploration Domain Randomization (DEDR)}{20}{subsection.4.7}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {25}{\ignorespaces Figure 25. SAC Source Domain with DEDR}}{21}{figure.25}\protected@file@percent }
-\newlabel{fig:sac_source_dedr}{{25}{21}{Figure 25. SAC Source Domain with DEDR}{figure.25}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {26}{\ignorespaces Figure 26. SAC Target Domain with DEDR}}{21}{figure.26}\protected@file@percent }
-\newlabel{fig:sac_target_dedr}{{26}{21}{Figure 26. SAC Target Domain with DEDR}{figure.26}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {27}{\ignorespaces Figure 27. PPO Source Domain with DEDR}}{21}{figure.27}\protected@file@percent }
-\newlabel{fig:ppo_source_dedr}{{27}{21}{Figure 27. PPO Source Domain with DEDR}{figure.27}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {28}{\ignorespaces Figure 28. PPO Target Domain with DEDR}}{21}{figure.28}\protected@file@percent }
-\newlabel{fig:ppo_target_dedr}{{28}{21}{Figure 28. PPO Target Domain with DEDR}{figure.28}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Results of SAC and PPO with Dynamic Exploration Domain Randomization.}}{21}{table.7}\protected@file@percent }
-\newlabel{tab:results_dedr}{{7}{21}{Results of SAC and PPO with Dynamic Exploration Domain Randomization}{table.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Figure 9. SAC Source Domain with UDR and larger ranges}}{13}{figure.9}\protected@file@percent }
+\newlabel{fig:sac_source_udr_larger}{{9}{13}{Figure 9. SAC Source Domain with UDR and larger ranges}{figure.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Figure 10. SAC Target Domain with UDR and larger ranges}}{13}{figure.10}\protected@file@percent }
+\newlabel{fig:sac_target_udr_larger}{{10}{13}{Figure 10. SAC Target Domain with UDR and larger ranges}{figure.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Figure 11. PPO Source Domain with UDR and larger ranges}}{13}{figure.11}\protected@file@percent }
+\newlabel{fig:ppo_source_udr_larger}{{11}{13}{Figure 11. PPO Source Domain with UDR and larger ranges}{figure.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Figure 12. PPO Target Domain with UDR and larger ranges}}{13}{figure.12}\protected@file@percent }
+\newlabel{fig:ppo_target_udr_larger}{{12}{13}{Figure 12. PPO Target Domain with UDR and larger ranges}{figure.12}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Results of SAC and PPO with Uniform Domain Randomization and medium ranges.}}{13}{table.3}\protected@file@percent }
+\newlabel{tab:results_udr_larger}{{3}{13}{Results of SAC and PPO with Uniform Domain Randomization and medium ranges}{table.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Figure 13. SAC Source Domain with UDR and larger ranges}}{14}{figure.13}\protected@file@percent }
+\newlabel{fig:sac_source_udr_larger}{{13}{14}{Figure 13. SAC Source Domain with UDR and larger ranges}{figure.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Figure 14. SAC Target Domain with UDR and larger ranges}}{14}{figure.14}\protected@file@percent }
+\newlabel{fig:sac_target_udr_larger}{{14}{14}{Figure 14. SAC Target Domain with UDR and larger ranges}{figure.14}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Figure 15. PPO Source Domain with UDR and larger ranges}}{14}{figure.15}\protected@file@percent }
+\newlabel{fig:ppo_source_udr_larger}{{15}{14}{Figure 15. PPO Source Domain with UDR and larger ranges}{figure.15}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Figure 16. PPO Target Domain with UDR and larger ranges}}{14}{figure.16}\protected@file@percent }
+\newlabel{fig:ppo_target_udr_larger}{{16}{14}{Figure 16. PPO Target Domain with UDR and larger ranges}{figure.16}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Results of SAC and PPO with Uniform Domain Randomization and larger ranges.}}{15}{table.4}\protected@file@percent }
+\newlabel{tab:results_udr_larger}{{4}{15}{Results of SAC and PPO with Uniform Domain Randomization and larger ranges}{table.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Reducing Ranged Domain Randomization (RRDR)}{16}{subsection.4.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Figure 17. SAC Source Domain with RRDR}}{16}{figure.17}\protected@file@percent }
+\newlabel{fig:sac_source_rrdr}{{17}{16}{Figure 17. SAC Source Domain with RRDR}{figure.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Figure 18. SAC Target Domain with RRDR}}{16}{figure.18}\protected@file@percent }
+\newlabel{fig:sac_target_rrdr}{{18}{16}{Figure 18. SAC Target Domain with RRDR}{figure.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Figure 19. PPO Source Domain with RRDR}}{16}{figure.19}\protected@file@percent }
+\newlabel{fig:ppo_source_rrdr}{{19}{16}{Figure 19. PPO Source Domain with RRDR}{figure.19}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces Figure 20. PPO Target Domain with RRDR}}{16}{figure.20}\protected@file@percent }
+\newlabel{fig:ppo_target_rrdr}{{20}{16}{Figure 20. PPO Target Domain with RRDR}{figure.20}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Results of SAC and PPO with Reducing Ranged Domain Randomization.}}{16}{table.5}\protected@file@percent }
+\newlabel{tab:results_rrdr}{{5}{16}{Results of SAC and PPO with Reducing Ranged Domain Randomization}{table.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Incremental Ranges Expansion Domain Randomization (IRE)}{17}{subsection.4.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces Figure 21. SAC Source Domain with IRE}}{18}{figure.21}\protected@file@percent }
+\newlabel{fig:sac_source_ire}{{21}{18}{Figure 21. SAC Source Domain with IRE}{figure.21}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces Figure 22. SAC Target Domain with IRE}}{18}{figure.22}\protected@file@percent }
+\newlabel{fig:sac_target_ire}{{22}{18}{Figure 22. SAC Target Domain with IRE}{figure.22}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces Figure 23. PPO Source Domain with IRE}}{18}{figure.23}\protected@file@percent }
+\newlabel{fig:ppo_source_ire}{{23}{18}{Figure 23. PPO Source Domain with IRE}{figure.23}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces Figure 24. PPO Target Domain with IRE}}{18}{figure.24}\protected@file@percent }
+\newlabel{fig:ppo_target_ire}{{24}{18}{Figure 24. PPO Target Domain with IRE}{figure.24}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Results of SAC and PPO with Incremental Ranges Expansion Domain Randomization.}}{18}{table.6}\protected@file@percent }
+\newlabel{tab:results_ire}{{6}{18}{Results of SAC and PPO with Incremental Ranges Expansion Domain Randomization}{table.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Exploration Uniform Domain Randomization (EUDR)}{19}{subsection.4.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {25}{\ignorespaces Figure 25. SAC Source Domain with EUDR}}{20}{figure.25}\protected@file@percent }
+\newlabel{fig:sac_source_eudr}{{25}{20}{Figure 25. SAC Source Domain with EUDR}{figure.25}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {26}{\ignorespaces Figure 26. SAC Target Domain with EUDR}}{20}{figure.26}\protected@file@percent }
+\newlabel{fig:sac_target_eudr}{{26}{20}{Figure 26. SAC Target Domain with EUDR}{figure.26}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {27}{\ignorespaces Figure 27. PPO Source Domain with EUDR}}{20}{figure.27}\protected@file@percent }
+\newlabel{fig:ppo_source_eudr}{{27}{20}{Figure 27. PPO Source Domain with EUDR}{figure.27}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {28}{\ignorespaces Figure 28. PPO Target Domain with EUDR}}{20}{figure.28}\protected@file@percent }
+\newlabel{fig:ppo_target_eudr}{{28}{20}{Figure 28. PPO Target Domain with EUDR}{figure.28}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Results of SAC and PPO with Exploration Uniform Domain Randomization.}}{20}{table.7}\protected@file@percent }
+\newlabel{tab:results_eudr}{{7}{20}{Results of SAC and PPO with Exploration Uniform Domain Randomization}{table.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Dynamic Range Cycle Domain Randomization (DRC)}{21}{subsection.4.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {29}{\ignorespaces Figure 29. SAC Source Domain with DRC}}{22}{figure.29}\protected@file@percent }
+\newlabel{fig:sac_source_drc}{{29}{22}{Figure 29. SAC Source Domain with DRC}{figure.29}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {30}{\ignorespaces Figure 30. SAC Target Domain with DRC}}{22}{figure.30}\protected@file@percent }
+\newlabel{fig:sac_target_drc}{{30}{22}{Figure 30. SAC Target Domain with DRC}{figure.30}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {31}{\ignorespaces Figure 31. PPO Source Domain with DRC}}{22}{figure.31}\protected@file@percent }
+\newlabel{fig:ppo_source_drc}{{31}{22}{Figure 31. PPO Source Domain with DRC}{figure.31}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {32}{\ignorespaces Figure 32. PPO Target Domain with DRC}}{22}{figure.32}\protected@file@percent }
+\newlabel{fig:ppo_target_drc}{{32}{22}{Figure 32. PPO Target Domain with DRC}{figure.32}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Results of SAC and PPO with Dynamic Range Cycle Domain Randomization.}}{22}{table.8}\protected@file@percent }
+\newlabel{tab:results_drc}{{8}{22}{Results of SAC and PPO with Dynamic Range Cycle Domain Randomization}{table.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7}Dynamic Exploration Domain Randomization (DEDR)}{23}{subsection.4.7}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {33}{\ignorespaces Figure 33. SAC Source Domain with DEDR}}{24}{figure.33}\protected@file@percent }
+\newlabel{fig:sac_source_dedr}{{33}{24}{Figure 33. SAC Source Domain with DEDR}{figure.33}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {34}{\ignorespaces Figure 34. SAC Target Domain with DEDR}}{24}{figure.34}\protected@file@percent }
+\newlabel{fig:sac_target_dedr}{{34}{24}{Figure 34. SAC Target Domain with DEDR}{figure.34}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {35}{\ignorespaces Figure 35. PPO Source Domain with DEDR}}{24}{figure.35}\protected@file@percent }
+\newlabel{fig:ppo_source_dedr}{{35}{24}{Figure 35. PPO Source Domain with DEDR}{figure.35}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {36}{\ignorespaces Figure 36. PPO Target Domain with DEDR}}{24}{figure.36}\protected@file@percent }
+\newlabel{fig:ppo_target_dedr}{{36}{24}{Figure 36. PPO Target Domain with DEDR}{figure.36}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Results of SAC and PPO with Dynamic Exploration Domain Randomization.}}{24}{table.9}\protected@file@percent }
+\newlabel{tab:results_dedr}{{9}{24}{Results of SAC and PPO with Dynamic Exploration Domain Randomization}{table.9}{}}
 \bibstyle{plainnat}
 \bibcite{Sutton2018}{1}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{22}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{25}{section.5}\protected@file@percent }
 \bibcite{Kober2013}{2}
 \bibcite{Kormushev2013}{3}
 \bibcite{Hofer2020}{4}
@@ -116,4 +138,4 @@
 \bibcite{Haarnoja2018}{7}
 \bibcite{Schulman2017}{8}
 \bibcite{Akkaya2020}{9}
-\gdef \@abspage@last{23}
+\gdef \@abspage@last{26}

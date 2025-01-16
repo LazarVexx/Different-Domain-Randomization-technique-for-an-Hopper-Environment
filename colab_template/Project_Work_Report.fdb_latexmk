@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1736770755.12361 "c:/Users/lucai/Documents/università/Laurea Magistrale/Laboratori/Robot Learning/ProjectWork/project-sim2real-lucaianniello/colab_template/Project_Work_Report.tex" "Project_Work_Report.pdf" "Project_Work_Report" 1736770758.0523 0
+["pdflatex"] 1737056503.06845 "c:/Users/lucai/Documents/università/Laurea Magistrale/Laboratori/Robot Learning/ProjectWork/project-sim2real-lucaianniello/colab_template/Project_Work_Report.tex" "Project_Work_Report.pdf" "Project_Work_Report" 1737056506.13638 0
   "../images/Learning_Curve_PPO_DE_Source.png" 1736757005 33011 34763f7565e5cb40971f2b9edd3eb9ec ""
   "../images/Learning_Curve_PPO_DE_Target.png" 1736757005 32582 037a40f20d6a515060a64bdbbd311b34 ""
   "../images/Learning_Curve_PPO_DRC_Source.png" 1736602083 33669 f56378cd5da768d5079d2b3ca81c16d1 ""
@@ -8,6 +8,10 @@
   "../images/Learning_Curve_PPO_EU_Target.png" 1736757005 32459 f1978b0d5d56f4a48cffaa6e3b9064d5 ""
   "../images/Learning_Curve_PPO_Incremental_Source.png" 1736757005 33568 7835bd140f765f3ce803a37e86dd83a2 ""
   "../images/Learning_Curve_PPO_Incremental_Target.png" 1736757005 31650 a9c119f30eaba851fe75cc81d55d1184 ""
+  "../images/Learning_Curve_PPO_Uniform_Large_Source.png" 1737056316 30975 c7114eb225c5db02a7187a349a0c6d7b ""
+  "../images/Learning_Curve_PPO_Uniform_Large_Target.png" 1737056475 31233 5c374870f927f236947c5628ad42e651 ""
+  "../images/Learning_Curve_PPO_Uniform_Medium_Source.png" 1737056316 32256 6a62f6ba734a39c2b34ce96748034ae3 ""
+  "../images/Learning_Curve_PPO_Uniform_Medium_Target.png" 1737056316 30597 e8b7463bbcfc3d1a77155f81c45212da ""
   "../images/Learning_Curve_PPO_Uniform_Source.png" 1736602083 29553 e3f781a159a4e72188239f3266a54aa1 ""
   "../images/Learning_Curve_PPO_Uniform_Target.png" 1736602083 31632 9ee20e14c57ebcaceec1276b60766772 ""
   "../images/Learning_Curve_PPO_no_rand_Source.png" 1736602083 31812 03ecec84e440b85a1fd963ae2415b5e8 ""
@@ -21,6 +25,10 @@
   "../images/Learning_Curve_SAC_Incremental_Target.png" 1736757005 28249 98e67dabf37d35371955eeed5cbdbcea ""
   "../images/Learning_Curve_SAC_Reducing_Source.png" 1736757005 33256 d404a5502ff01ffaedecf3206b9f2382 ""
   "../images/Learning_Curve_SAC_Reducing_Target.png" 1736757005 31054 7ae35ffa4977b6af310f230ad54f9561 ""
+  "../images/Learning_Curve_SAC_Uniform_Large_Source.png" 1737056316 32312 34178e7a3e2a5f5c658adf528b1dd8c1 ""
+  "../images/Learning_Curve_SAC_Uniform_Large_Target.png" 1737056316 32132 59a5867febcf6e64bd2c5201f2665136 ""
+  "../images/Learning_Curve_SAC_Uniform_Medium_Source.png" 1737056316 31661 8b4887cdd160732b9632b52709c61fd2 ""
+  "../images/Learning_Curve_SAC_Uniform_Medium_Target.png" 1737056316 32195 0742100a6c57a17435264b1ce637108e ""
   "../images/Learning_Curve_SAC_Uniform_Source.png" 1736757005 30877 5a53aa880b68894edc701f405853b043 ""
   "../images/Learning_Curve_SAC_Uniform_Target.png" 1736757005 30206 9dcf5ed44ad9d8f06ae39633011c76db ""
   "../images/Learning_Curve_SAC_no_rand_Source.png" 1736757005 31079 32967f3fd280f197f88857e442bb921a ""
@@ -108,10 +116,10 @@
   "C:/Users/lucai/AppData/Local/Programs/MiKTeX/tex/latex/refcount/refcount.sty" 1576433952 9878 9e94e8fa600d95f9c7731bb21dfb67a4 ""
   "C:/Users/lucai/AppData/Local/Programs/MiKTeX/tex/latex/rerunfilecheck/rerunfilecheck.sty" 1657800696 9714 ba3194bd52c8499b3f1e3eb91d409670 ""
   "C:/Users/lucai/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
-  "Project_Work_Report.aux" 1736770757 12069 404ba9a512f4e683b5be5be332d791a2 "pdflatex"
-  "Project_Work_Report.out" 1736770757 4134 5608a1f18c0754a2e2efea2ccbac8d7b "pdflatex"
-  "Project_Work_Report.tex" 1736770720 63357 e1e953e282b4ad89881c27dd71fdeefc ""
-  "c:/Users/lucai/Documents/università/Laurea Magistrale/Laboratori/Robot Learning/ProjectWork/project-sim2real-lucaianniello/colab_template/Project_Work_Report.tex" 1736770720 63357 e1e953e282b4ad89881c27dd71fdeefc ""
+  "Project_Work_Report.aux" 1737056505 15049 56d5c4634c999bc9865b0f53626653a3 "pdflatex"
+  "Project_Work_Report.out" 1737056505 4220 0cd5d097a56b216fed1bb9f55c7bc9be "pdflatex"
+  "Project_Work_Report.tex" 1737056209 70877 d72cffa66000089efc8134879684055d ""
+  "c:/Users/lucai/Documents/università/Laurea Magistrale/Laboratori/Robot Learning/ProjectWork/project-sim2real-lucaianniello/colab_template/Project_Work_Report.tex" 1737056209 70877 d72cffa66000089efc8134879684055d ""
   (generated)
   "Project_Work_Report.aux"
   "Project_Work_Report.log"

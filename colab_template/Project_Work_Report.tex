@@ -17,11 +17,9 @@
 
 \begin{abstract}
 
-    This report presents the methodologies and results of a project undertaken as part of the Robot Learning course at the University of Turin. The primary objective of the project was to implement a Reinforcement Learning (RL) pipeline for the Hopper environment in OpenAI Gym, utilizing the Soft Actor-Critic (SAC) and Proximal Policy Optimization (PPO) algorithms. Additionally, the project explored the application of Uniform Domain Randomization (UDR). As extension part of the project I decided to explore various domain randomization techniques and combinations thereof.
+    This report presents the methodologies and results of the project work done during the Robot Learning course at the University of Turin. The primary objective of the project was to implement a Reinforcement Learning (RL) pipeline for the Hopper environment in OpenAI Gym, utilizing the Soft Actor-Critic (SAC) and Proximal Policy Optimization (PPO) algorithms. Additionally, the project explored the application of Uniform Domain Randomization (UDR). As extension part of the project I decided to explore various domain randomization techniques and their combinations.
 
-    The primary goal of the project is to evaluate the performance of different domain randomization strategies and compare their effectiveness against UDR. The report is structured as follows: the \textit{Introduction} presents the problem and the research goals; the \textit{Related Work} section discusses key contributions in the fields of RL and domain randomization; the \textit{Methodology} outlines the techniques and approaches employed in the study; the \textit{Experiments} section describes the experimental setup and protocols; the \textit{Results} section analyzes the findings; and the \textit{Conclusion} summarizes the outcomes and highlights potential future directions.
-    
-    This study provides valuable insights into the impact of advanced domain randomization techniques on the robustness and generalization of RL models, offering a comparative analysis that can inform future research and applications in robot learning.
+    The primary goal of the project is to evaluate the performance of different domain randomization strategies and compare their effectiveness against UDR. The report is structured as follows: the \textit{Introduction} presents the problem and the research goals; the \textit{Related Work} section discusses key contributions in the fields of RL and domain randomization; the \textit{Methodology} outlines the techniques and approaches employed in the study; the \textit{Experiments and Results} section describes the experimental setup and protocols and the analysis of the obtained results; and the \textit{Conclusion} summarizes the outcomes and highlights potential future directions.
     
 \end{abstract}
 
@@ -29,9 +27,9 @@
 
 Reinforcement Learning (RL) has emerged as a powerful paradigm for training agents to perform complex tasks in a variety of domains, including robotics, gaming, and natural language processing \cite{Sutton2018}. RL algorithms learn to make decisions by interacting with an environment and receiving feedback in the form of rewards or penalties. By optimizing their policies based on this feedback, RL agents can learn to perform tasks that are difficult to program explicitly \cite{Kober2013}. 
 
-One of the key challenges in RL is the generalization of learned policies to new environments or scenarios. RL models are often trained in simulation environments that may differ significantly from the real-world settings in which they are intended to operate. This discrepancy can lead to a phenomenon known as the reality gap, where models fail to transfer their learned behaviors to the real world due to differences in the environment dynamics, sensor noise, or other factors \cite{Kormushev2013, Hofer2020}.
+One of the key challenges in RL is the generalization of learned policies to new environments or scenarios. RL models are often trained in simulation environments that may differ significantly from the real-world settings in which they are intended to operate. This discrepancy can lead to a phenomenon known as reality gap, where models fail to transfer their learned behaviors to the real world due to differences in the environment dynamics, sensor noise, or other factors \cite{Kormushev2013, Hofer2020}.
 
-Domain randomization is a technique that aims to bridge the reality gap by training RL models on a diverse set of simulated environments that capture a wide range of possible scenarios. By randomizing the parameters of the simulation, such as lighting conditions, object textures, or physical properties, domain randomization can help models learn robust policies that generalize across different environments \cite{Tobin2017, Peng2018}.
+Domain randomization is a technique that aims to bridge the reality gap by training RL models on a diverse set of simulated environments that capture a wide range of possible scenarios. By randomizing the parameters of the simulation, such as physical properties, domain randomization can help models learn robust policies that generalize across different environments \cite{Tobin2017, Peng2018}.
 
 In this project, we explore the impact of different domain randomization techniques on the performance of RL models in the Hopper environment in OpenAI Gym. We focus on the Soft Actor-Critic (SAC) and Proximal Policy Optimization (PPO) algorithms, which are state-of-the-art RL methods that have been shown to achieve strong performance on a variety of tasks \cite{Haarnoja2018, Schulman2017}. We compare the effectiveness of Uniform Domain Randomization (UDR) with other domain randomization strategies, developed as part of the project. 
 
@@ -45,7 +43,11 @@ The problem of sim-to-real transfer in robotics has been a topic of significant 
 
 One of the key challenges in sim-to-real transfer is the domain gap between the simulated and real-world environments. By randomizing the parameters of the simulation, such as lighting conditions, object textures, or physical properties, domain randomization can help models learn policies that are robust to these differences \cite{Tobin2017}.
 
-Recent work has explored various domain randomization techniques for sim-to-real transfer, including dynamics randomization, sensor noise injection, and adversarial training. These methods have been shown to improve the generalization and robustness of RL models, enabling them to perform tasks in real-world settings that were previously infeasible \cite{Peng2018}.
+Recent work has explored various domain randomization techniques for sim-to-real transfer, including dynamics randomization. These methods have been shown to improve the generalization and robustness of RL models, enabling them to perform tasks in real-world settings that were previously infeasible \cite{Peng2018}.
+
+In the context of robotics, domain randomization has been applied to a wide range of tasks, including robotic manipulation, locomotion, and navigation. By training agents in diverse simulated environments, researchers have been able to develop RL models that can adapt to changes in the environment dynamics and sensor noise, making them more robust and generalizable \cite{Kormushev2013, Hofer2020}.
+
+The results of these studies have demonstrated the effectiveness of domain randomization for sim-to-real transfer in robotics. By comparing the performance of different domain randomization techniques, researchers can gain insights into the most effective strategies for training agents that can operate in real-world settings.
 
 \subsection{B. Soft Actor-Critic and Proximal Policy Optimization}
 
@@ -74,7 +76,7 @@ Uniform Domain Randomization is only one of the implemented domain randomization
 \section{Methodology}
 
 \subsection{The Hopper Environment}
-The techniques and approaches employed in the study are done on the Hopper environment in OpenAI Gym. 
+The techniques and approaches employed in the project are done on the Hopper environment in OpenAI Gym. 
 The Hopper Environment is a 2D physics-based environment where the agent controls a 2D hopper to move forward. The agent receives a reward proportional to the distance it moves forward. The goal of the agent is to learn a policy that maximizes the cumulative reward over time. The Hopper environment is challenging due to its high-dimensional action space and complex dynamics, making it an ideal testbed for evaluating the performance of RL algorithms. 
 The state space is continual and it is composed by the positional values of different body parts. In details, the state space is composed by the following values:
 \begin{itemize}
@@ -107,14 +109,14 @@ One important aspect of the Hopper environment is related to the masses of the b
     \item Mass of the foot
 \end{itemize}
 
-In our Hopper Environment, we consider the torse mass fixed as the original values less 1.0 and we will not modify the mass of the world. The mass of the thigh, leg and foot will be modified by the domain randomization techniques.
+In our Hopper Environment, we consider the torse mass fixed as the original values less 1.0 in the source domain and we will not modify the mass of the world. The mass of the thigh, leg and foot will be modified by the domain randomization techniques.
 
 The common Reinforcement Learning pipeline was done using the Soft Actor-Critic (SAC) and Proximal Policy Optimization (PPO) algorithms. In the experimental section, we will compare the performance of these two algorithms considering the different domain randomization techniques.
 
 
 \subsection{Soft Actor-Critic (SAC) and Proximal Policy Optimization (PPO)}
 
-In this experiments, the Soft Actor-Critic (SAC) and Proximal Policy Optimization (PPO) algorithms were used as implemented in the \texttt{stable-baselines3} library. These two reinforcement learning algorithms differ significantly in their nature: SAC is an off-policy algorithm, whereas PPO is an on-policy algorithm. This distinction necessitated adjustments to the training process, particularly when incorporating domain randomization techniques.
+In this experiments, the Soft Actor-Critic (SAC) and Proximal Policy Optimization (PPO) algorithms were used as implemented in the \texttt{stable-baselines3} library. These two reinforcement learning algorithms differ significantly in their nature: SAC is an off-policy algorithm, whereas PPO is an on-policy algorithm. Their diversity brings to some adjustments to the training process, particularly when incorporating domain randomization techniques.
 
 For the PPO algorithm, a \texttt{batch\_size} variable was defined to ensure consistency in training. This variable was set equal to the number of steps (\texttt{n\_steps}) of the PPO model. This design choice aligns with the requirements of on-policy algorithms, which rely on collecting batches of transitions from the same policy before performing updates. By ensuring that domain randomization parameters remain fixed during the collection of transitions within each batch, the PPO algorithm was able to compute accurate advantage estimates and perform stable updates to the policy.
 
@@ -129,7 +131,7 @@ The first type of implemented domain adaptation technique is the Uniform Domain 
     \item Mass of the foot: 5.0893801
 \end{itemize}
 
-The ranges of the masses are defined considering the original values of the masses and create a range of values around the original values, considering as lower bound the original value less 0.2 and as upper bound the original value plus 0.2. The reason behind this choice is the consequence of different test done with SAC and PPO algorithm on ranges of larger values. In this tests, the agent was not able to learn a good policy in both the algorithms. Larger ranges introduce more diverse physical behaviors, making it harder for the policy to generalize across all possible configurations. Both SAC and PPO rely on exploration to find optimal actions. If the environment is too diverse, the agent may struggle to identify patterns that consistently lead to high rewards.
+The ranges of the masses are defined considering the original values of the masses and create a range of values around the original values, considering as lower bound the original value less 0.2 and as upper bound the original value plus 0.2. The reason behind this choice is the consequence of different test done with SAC and PPO algorithm on ranges of larger values. In the experiment section, I have tested also large ranges (0.8 and 1.5).  In this tests, the agent was not able to learn a good policy in both the algorithms. Larger ranges introduce more diverse physical behaviors, making it harder for the policy to generalize across all possible configurations. Both SAC and PPO rely on exploration to find optimal actions. If the environment is too diverse, the agent may struggle to identify patterns that consistently lead to high rewards.
 
 The second type of implemented domain randomization technique is based on the idea of starting with large ranges and reducing them as training progresses. The name associated with this algorithm is Reducing Ranged Domain Randomization (RRDR). This method calculates a dynamic factor, referred to as the RRDR factor, which decreases over time to progressively narrow the randomization ranges. At the start of training, large ranges are used to encourage exploration of diverse dynamics. The range expansion is applied only to the upper bound, while the lower bound remains fixed. These ranges are defined around the original masses of the thigh, leg, and foot, with initial bounds expanded by the RRDR factor. The RRDR factor is determined based on the current training progress: during the first 20\% of the total timesteps, large ranges are used with an upper-bound increment of 0.5. Following this phase, a logarithmic reduction is applied to the RRDR factor until 80\% of the total timesteps is reached. After this point, the increment becomes 0, and the ranges converge to those used in Uniform Domain Randomization (UDR). The mass for each body part is then sampled from a normal distribution, where the mean shifts toward the original mass values as training progresses, and the standard deviation decreases to focus the sampling range. This approach ensures that the agent is exposed to a wide variety of dynamics initially, while gradually narrowing the range toward the target domain, facilitating both exploration and fine-tuning during different phases of training.
 
@@ -143,9 +145,9 @@ The fifth domain randomization technique implemented is the Dynamic Range Cycle 
 
 The sixth and last domain randomization method implemented is the Dynamic Exploration Domain Randomization (DEDR). This technique divides the training process into three phases: Reducing Ranged Domain Randomization, Uniform Domain Randomization, and Incremental Ranges Expansion Domain Randomization, each designed to guide the agent through distinct exploration and exploitation strategies during training. Initially, the reducing phase employs large randomization ranges around the original masses, encouraging extensive exploration of the environment's dynamics. This phase, which spans 40\% of the total training steps, ensures that the agent is exposed to diverse variations early in the training process, helping to prevent premature convergence to suboptimal policies. The reducing phase transitions into the uniform phase, accounting for 30\% of the training steps, where fixed randomization ranges are applied. These ranges are equal to the decreased ranges obtained after the RRDR algorithm end, striking a balance between exploration and stability. In the final increment phase, spanning the remaining 30\% of the training, the randomization ranges are gradually expanded again, focusing the exploration on variations near those encountered during the uniform phase. The entropy coefficient is dynamically adjusted based on the training phase and reinforcement learning algorithm in use. During the reducing phase, the entropy coefficient is set higher to promote exploration, while it is lowered during the uniform phase to stabilize learning. In the increment phase, a moderate entropy coefficient ensures controlled exploration near the learned dynamics. This structured progression of exploration and exploitation phases, combined with adaptive range adjustments, enables the DEDR method to systematically guide the agent toward robust policy learning in dynamic environments.
 
-\section{Results}
+\section{Experiments and Results}
 
-In this section, I present the results obtained using the Soft Actor-Critic (SAC) and Proximal Policy Optimization (PPO) algorithms with various domain randomization techniques. The results are illustrated through the training progress plots of the two algorithms, evaluated in both the source and target domains.
+In this section, I present the results obtained using the Soft Actor-Critic (SAC) and Proximal Policy Optimization (PPO) algorithms with various domain randomization techniques. The results are illustrated through the learning curve of the two algorithms, evaluated in both the source and target domains.
 
 For each algorithm and each domain randomization technique, two distinct models were trained: one in the source domain and the other in the target domain. The only difference between the source and the target domain is related to the mass values of the torse. This value is not subject to randomization, but in the source domain the value is 1.0 less than the corresponding value in the target domain. 
 The analysis focuses on the mean reward and standard deviation obtained during the evaluation of these models in their respective domains. Additionally, I evaluate the performance of the source-trained model when deployed in the target domain to assess its generalization capabilities. I will consider the results obtained in the target->target evaluation as a upper bound for the performance of the models in the target domain and the results obtained in the source->target evaluation as a lower bound for the performance of the models in the target domain. 
@@ -205,7 +207,7 @@ In the following table, I report the mean reward and standard deviation obtained
     \label{tab:results_no_randomization}
 \end{table}
 
-The results show that both SAC and PPO achieve higher mean rewards in the target domain compared to the source domain when trained without domain randomization. However, the standard deviation of the rewards is higher in the target domain, indicating that the models exhibit greater variability in their performance. The generalization capabilities of the models are also evident, with the source-trained models achieving competitive performance in the target domain. These results suggest that the models are able to adapt to the dynamics of the target domain without the need for domain randomization.
+The results show that both SAC and PPO achieve higher mean rewards in the target domain compared to the source domain when trained without domain randomization. However, the standard deviation of the rewards is higher in the target domain, indicating that the models exhibit greater variability in their performance. The generalization capabilities of the models are also evident, with the source-trained models achieving competitive performance in the target domain for the SAC algorithm. These results suggest that the models are able to adapt to the dynamics of the target domain without the need for domain randomization.
 
 In both cases the PPO algorithm has a lower mean reward and a lower standard deviation compared to the SAC algorithm. This is due to the fact that the PPO algorithm is an on-policy algorithm and it is more stable than the SAC algorithm. The SAC algorithm is an off-policy algorithm and it is more prone to instability during the training process. This is the reason why the SAC algorithm has a higher standard deviation compared to the PPO algorithm. This aspect will be fondamental to understand the impact of the domain randomization techniques on the two algorithms. 
 
@@ -217,7 +219,7 @@ The idea of testing different domain randomization techniques is to understand h
 
 \subsection{Uniform Domain Randomization (UDR)}
 
-The next set of experiments was conducted using the Uniform Domain Randomization (UDR) technique. The following four pictures shows the learning curve of SAC and PPO considering the source and the target domain with UDR.
+The next set of experiments was conducted using the Uniform Domain Randomization (UDR) technique. The following four pictures shows the learning curve of SAC and PPO considering the source and the target domain with UDR and ranges defined with an increment of 0.2 (small increment).
 
 \begin{figure}[H]
     \centering
@@ -268,7 +270,7 @@ In the following table, I report the mean reward and standard deviation obtained
     \label{tab:results_udr}
 \end{table}
 
-The results show that both SAC and PPO achieve lower mean rewards in the target domain compared to the source domain when trained with Uniform Domain Randomization. The standard deviation of the rewards is also lower in the target domain, indicating that the models exhibit less variability in their performance. The generalization capabilities of the models are evident, with the source-trained models achieving competitive performance in the target domain. These results suggest that Uniform Domain Randomization can improve the robustness and generalization of the models, enabling them to adapt to different dynamics.
+The results show that both SAC and PPO achieve lower mean rewards in the target domain compared to the source domain when trained with Uniform Domain Randomization. The standard deviation of the rewards is also lower in the target domain, indicating that the models exhibit less variability in their performance. The generalization capabilities of the models are evident in the PPO algorithm, with the source-trained models achieving competitive performance in the target domain. These results suggest that Uniform Domain Randomization can improve the robustness and generalization of the models, enabling them to adapt to different dynamics.
 
 These results suggest that, while SAC excels in stability within its domain, it faces greater challenges when generalizing across domains, especially with domain randomization. PPO, on the other hand, is more robust to domain shifts, demonstrating better generalization across both the source and target domains even with UDR applied. This highlights PPO’s ability to efficiently explore and adapt in more diverse environments. The rendered results shows that PPO was able to find a policy that moves correctly the hopper in both source and target domain, while SAC was not able to find a good policy in the target domain.
 
@@ -276,11 +278,123 @@ The results obtained can be attributed to the use of fixed categories for the ma
 The Soft Actor-Critic algorithm, being more sensitive to changes in the environment, struggles to adapt to the target domain, where the torso mass is different from the source domain. SAC’s exploration capabilities are constrained by the small randomization ranges applied to the leg, foot, and thigh masses. This limits the algorithm's ability to explore and learn a robust policy that generalizes well in the target domain, where the torso mass difference plays a larger role.
 On the other hand, the Proximal Policy Optimization algorithm, which is on-policy and more stable, handles the torso mass difference better. Due to its stability, PPO is able to learn a policy that generalizes better in the target domain, despite the unrandomized torso mass difference.
 
-The current results with Uniform Domain Randomization are suboptimal for SAC because SAC struggles to explore the environment effectively, largely due to the limited ranges of mass randomization. Expanding the randomization ranges for the leg, foot, and thigh masses could provide SAC with more opportunities to explore and adapt its policy to a broader set of conditions, which may improve generalization across both the source and target domains. However, previous tests with larger randomization ranges demonstrated that SAC and PPO were unable to learn a good policy within 250,000 timesteps. As a consequence of this results, I have decided to use the values previously reported for the increment of range sizes because PPO is able to perform better with these ranges and it obtains these results faster, considering the training times. 
+The current results with Uniform Domain Randomization are suboptimal for SAC because SAC struggles to explore the environment effectively, largely due to the limited ranges of mass randomization. Expanding the randomization ranges for the leg, foot, and thigh masses could provide SAC with more opportunities to explore and adapt its policy to a broader set of conditions, which may improve generalization across both the source and target domains. 
+
+The next two tests will consider the use of larger ranges for the mass values. The results obtained in these tests will be compared with the results obtained with the small ranges.
+
+First of all, I have defined a medium increment ranges, where ranges are increased of 0.8. The following four pictures shows the learning curve of SAC and PPO considering the source and the target domain with UDR and ranges defined with an increment of 0.8 (medium increment).
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_Uniform_Medium_Source.png}
+        \caption{Figure 9. SAC Source Domain with UDR and larger ranges}
+        \label{fig:sac_source_udr_larger}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_Uniform_Medium_Target.png}
+        \caption{Figure 10. SAC Target Domain with UDR and larger ranges}
+        \label{fig:sac_target_udr_larger}
+    \end{minipage}
+    \vfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_Uniform_Medium_Source.png}
+        \caption{Figure 11. PPO Source Domain with UDR and larger ranges}
+        \label{fig:ppo_source_udr_larger}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_Uniform_Medium_Target.png}
+        \caption{Figure 12. PPO Target Domain with UDR and larger ranges}
+        \label{fig:ppo_target_udr_larger}
+    \end{minipage}
+\end{figure}
+
+In the following table, I report the mean reward and standard deviation obtained by the models trained with Uniform Domain Randomization and larger ranges in the source and target domains:
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|c|c|}
+        \hline
+        \textbf{Algorithm} & \textbf{Evaluation} & \textbf{Mean Reward} & \textbf{Standard Deviation} \\ \hline
+        SAC & Source $\rightarrow$ Source & 1557.56 & 18.36 \\ 
+        SAC & Source $\rightarrow$ Target & 1459.58 & 142.15 \\ 
+        SAC & Target $\rightarrow$ Target & 1463.26 & 2.08 \\ \hline
+        PPO & Source $\rightarrow$ Source & 935.47 & 82.87 \\ 
+        PPO & Source $\rightarrow$ Target & 746.77 & 51.19 \\ 
+        PPO & Target $\rightarrow$ Target & 1048.83 & 248.37 \\ \hline
+    \end{tabular}
+    \caption{Results of SAC and PPO with Uniform Domain Randomization and medium ranges.}
+    \label{tab:results_udr_larger}
+\end{table}
+
+The results show an increment of the mean reward values of the SAC model, but an decreasing of the mean reward values of the PPO model, comparing them with the results obtained in the previous UDR analysis. The rendering of the results shows that the SAC model is not able to find a good policy that moves correctly the hopper in both the source and the target domain, even there is an improvemenent compared to previous results. However, the results obtained with PPO shows that the model is not able to find a good policy to move correctly the hopper in both the environments. 
+
+The following four pictures shows the learning curve of SAC and PPO considering the source and the target domain with UDR and ranges defined with an increment of 1.5 (large increment).
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_Uniform_Large_Source.png}
+        \caption{Figure 13. SAC Source Domain with UDR and larger ranges}
+        \label{fig:sac_source_udr_larger}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_Uniform_Large_Target.png}
+        \caption{Figure 14. SAC Target Domain with UDR and larger ranges}
+        \label{fig:sac_target_udr_larger}
+    \end{minipage}
+    \vfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_Uniform_Large_Source.png}
+        \caption{Figure 15. PPO Source Domain with UDR and larger ranges}
+        \label{fig:ppo_source_udr_larger}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_Uniform_Large_Target.png}
+        \caption{Figure 16. PPO Target Domain with UDR and larger ranges}
+        \label{fig:ppo_target_udr_larger}
+    \end{minipage}
+\end{figure}
+
+In the following table, I report the mean reward and standard deviation obtained by the models trained with Uniform Domain Randomization and larger ranges in the source and target domains:
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|c|c|}
+        \hline
+        \textbf{Algorithm} & \textbf{Evaluation} & \textbf{Mean Reward} & \textbf{Standard Deviation} \\ \hline
+        SAC & Source $\rightarrow$ Source & 718.15 & 66.19 \\ 
+        SAC & Source $\rightarrow$ Target & 735.93 & 44.44 \\ 
+        SAC & Target $\rightarrow$ Target & 1176.75 & 273.61 \\ \hline
+        PPO & Source $\rightarrow$ Source & 811.97 & 70.98 \\ 
+        PPO & Source $\rightarrow$ Target & 1086.12 & 57.55 \\ 
+        PPO & Target $\rightarrow$ Target & 1502.40 & 35.66 \\ \hline
+    \end{tabular}
+    \caption{Results of SAC and PPO with Uniform Domain Randomization and larger ranges.}
+    \label{tab:results_udr_larger}
+\end{table}
+
+The results show that the mean reward values of the SAC model are lower than the mean reward values obtained with the medium ranges, while the once obtained with PPO are higher. However, The rendering of the results shows that both the SAC model and the PPO model are not able to find a good policy that moves correctly the hopper in both the source and the target domain. The results obtained with the PPO model are higher than the results obtained with the medium ranges. 
+
+The larger ranges in the Uniform Domain Randomization approach provide more opportunities for exploration and adaptation, allowing the agent to experience a wider range of dynamics and environments. This can help the agent learn more robust policies that generalize well across domains, improving adaptability and performance. However, the larger ranges can also introduce more variability and instability in learning, making it difficult for the agent to converge on a good solution. This is reflected in the higher standard deviation in the results, where the agent might learn to adapt to randomization but with less stability, especially when trained with a large variety of parameter settings. This limitation highlights the need for more adaptive domain randomization techniques that can provide a balance between exploration and exploitation, allowing the agent to adapt to a wide range of dynamics while maintaining robustness and generalization capabilities.
+
+The choice of using lower ranges can be a good choice because with small ranges I have obtained good results with PPO, considering a lower computational time, considering the lower results obtained with large ranges with SAC, considering an higher computational time.
 
 From these results, we can conclude that UDR helps PPO maintain better performance when transitioning to the target domain, as evidenced by the relatively higher rewards and the smaller drop in performance from the source to the target domain. For SAC, UDR doesn't seem to fully compensate for the torso mass shift, leading to lower performance in the target domain.
 
-While UDR allows the models to adapt to the target domain, the use of fixed ranges for values can cause overfitting to the source domain. The models may learn a policy that is too specific to the source domain, making it difficult to generalize to the target domain. In addition, while UDR helps the agent to handle different configurations and environmental shifts, the variability introduced during training could lead to instability in learning. This is reflected in the higher standard deviation in PPO’s "source→target" results, where the model might learn to adapt to randomization but with less stability, especially when trained with a large variety of parameter settings. This limitation highlights the need for more adaptive domain randomization techniques that can provide a balance between exploration and exploitation, allowing the models to adapt to a wide range of dynamics while maintaining robustness and generalization capabilities.
+In general, while UDR allows the models to adapt to the target domain, the use of fixed ranges for values can cause overfitting to the source domain. The models may learn a policy that is too specific to the source domain, making it difficult to generalize to the target domain. In addition, while UDR helps the agent to handle different configurations and environmental shifts, the variability introduced during training could lead to instability in learning. This is reflected in the higher standard deviation in PPO’s "source to target" results, where the model might learn to adapt to randomization but with less stability, especially when trained with a large variety of parameter settings. This limitation highlights the need for more adaptive domain randomization techniques that can provide a balance between exploration and exploitation, allowing the models to adapt to a wide range of dynamics while maintaining robustness and generalization capabilities.
 
 \subsection{Reducing Ranged Domain Randomization (RRDR)}
 
@@ -291,28 +405,28 @@ The next set of experiments was conducted using the Reducing Ranged Domain Rando
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_Reducing_Source.png}
-        \caption{Figure 9. SAC Source Domain with RRDR}
+        \caption{Figure 17. SAC Source Domain with RRDR}
         \label{fig:sac_source_rrdr}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_Reducing_Target.png}
-        \caption{Figure 10. SAC Target Domain with RRDR}
+        \caption{Figure 18. SAC Target Domain with RRDR}
         \label{fig:sac_target_rrdr}
     \end{minipage}
     \vfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_curve_PPO_reducing_Source.png}
-        \caption{Figure 11. PPO Source Domain with RRDR}
+        \caption{Figure 19. PPO Source Domain with RRDR}
         \label{fig:ppo_source_rrdr}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_curve_PPO_reducing_Target.png}
-        \caption{Figure 12. PPO Target Domain with RRDR}
+        \caption{Figure 20. PPO Target Domain with RRDR}
         \label{fig:ppo_target_rrdr}
     \end{minipage}
 
@@ -336,9 +450,9 @@ In the following table, I report the mean reward and standard deviation obtained
     \label{tab:results_rrdr}
 \end{table}
 
-The results show better results for both SAC and PPO considering the source to target evaluation. The results obtained in the source to target evaluation are higher compared to the results obtained with UDR. This is obtained thanks to the nature of the implemented algorithm. The RRDR approach starts with large randomization ranges for body mass values, encouraging exploration of a wide variety of configurations in the early stages of training. This is particularly important because it allows the agent to experience diverse scenarios and adapt to a broader range of potential states. Over time, as the randomization factor is gradually reduced, the agent shifts from exploration to exploitation, focusing on optimizing its policy for more stable and predictable environments. This balance of exploration and exploitation helps the agent learn more robust policies that generalize better across domains.
+The results show better results for both SAC and PPO considering the source to target evaluation obtained with UDR. This is obtained thanks to the nature of the implemented algorithm. The RRDR approach starts with large randomization ranges for body mass values, encouraging exploration of a wide variety of configurations in the early stages of training. This is particularly important because it allows the agent to experience diverse scenarios and adapt to a broader range of potential states. Over time, as the randomization factor is gradually reduced, the agent shifts from exploration to exploitation, focusing on optimizing its policy for more stable and predictable environments. This balance of exploration and exploitation helps the agent learn more robust policies that generalize better across domains.
 
-However, even the results show that SAC and PPO achieve higher stabilities, the render results shows that both algorithms are not able to find a policy that moves correctly the hopper in both source and target domain. They achive good results in the source to source evaluation, while in the source to target both algorithm fails. Statistically, I have found that SAC fails more than PPO considering the 100 episodes. A possible reason for this behaviour can be again related to the ranges. In this case, the increment of the ranges can be not enough to allow the SAC and PPO algorithm to learn a good policy in the target domain. Possible tests can be done considering larger ranges and other type of reduction. In previous tests, I have tested with linear decay, but performance for both algorithms was not good.
+However, even the results show that SAC and PPO achieve higher stabilities, the render results shows that both algorithms are not able to find a policy that moves correctly the hopper in both source and target domain. They achieve good results in the source to source evaluation, while in the source to target both algorithm fails. Statistically, I have found that SAC fails more than PPO considering the 100 episodes. A possible reason for this behaviour can be again related to the ranges. In this case, the increment of the ranges can be not enough to allow the SAC and PPO algorithm to learn a good policy in the target domain with a gradual increment. In previous tests, I have tested with linear decay, but performance for both algorithms was not good.
 
 \subsection{Incremental Ranges Expansion Domain Randomization (IRE)}
 
@@ -349,28 +463,28 @@ The next set of experiments was conducted using the Incremental Ranges Expansion
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_Incremental_Source.png}
-        \caption{Figure 13. SAC Source Domain with IRE}
+        \caption{Figure 21. SAC Source Domain with IRE}
         \label{fig:sac_source_ire}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_Incremental_Target.png}
-        \caption{Figure 14. SAC Target Domain with IRE}
+        \caption{Figure 22. SAC Target Domain with IRE}
         \label{fig:sac_target_ire}
     \end{minipage}
     \vfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_Incremental_Source.png}
-        \caption{Figure 15. PPO Source Domain with IRE}
+        \caption{Figure 23. PPO Source Domain with IRE}
         \label{fig:ppo_source_ire}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_Incremental_Target.png}
-        \caption{Figure 16. PPO Target Domain with IRE}
+        \caption{Figure 24. PPO Target Domain with IRE}
         \label{fig:ppo_target_ire}
     \end{minipage}
 \end{figure}
@@ -393,9 +507,9 @@ In the following table, I report the mean reward and standard deviation obtained
     \label{tab:results_ire}
 \end{table}
 
-The results show that both SAC and PPO achieve an overall higher mean rewards in the three evaluations compared to the results obtained with UDR, but also with an increase of the standard deviation value. This is obtained thanks to the nature of the implemented algorithm. The IRE approach provides a structured progression of exploration and exploitation phases, allowing the agent to adapt to different dynamics over the course of training. The initial focus on narrower ranges in the early stages of training helps the agent learn a stable policy that generalizes well to the source domain. As the ranges expand gradually, the agent is exposed to more diverse dynamics, improving its adaptability and robustness. By the end of training, the agent has experienced a wide range of conditions, enabling it to perform well in the target domain. This structured approach to domain randomization helps the agent balance exploration and exploitation, leading to more robust and generalizable policies.
+The results show that both SAC and PPO achieve an overall higher mean rewards in the three evaluations compared to the results obtained with UDR, but also with an increase of the standard deviation value. This is obtained as a consequence  nature of the implemented algorithm. The IRE approach provides a structured progression of exploration and exploitation phases, allowing the agent to adapt to different dynamics over the course of training. The initial focus on narrower ranges in the early stages of training helps the agent learn a stable policy that generalizes well to the source domain. As the ranges expand gradually, the agent is exposed to more diverse dynamics, improving its adaptability and robustness. By the end of training, the agent has experienced a wide range of conditions, enabling it to perform well in the target domain. This structured approach to domain randomization helps the agent balance exploration and exploitation, leading to more robust and generalizable policies.
 
-Even the results are better, also in this case the behaviour is similar to the Reducing Ranged Domain Randomization renderings. The results obtained in the source to target evaluation are lower compared to the results obtained with RRDR. This is due to the fact that the ranges are not enough to allow the agent to learn a good policy in the target domain. Also in this case possible tests can be done considering larger ranges and other type of reduction. 
+The behavior observed here is similar to that of the Reducing Ranged Domain Randomization (RRDR) renderings, even though the results are better. In the source-to-target evaluation, the performance is lower compared to the results achieved with RRDR. This outcome can be attributed to the limited ranges, which are insufficient for the agent to learn an effective policy in the target domain. Further tests could explore the use of broader ranges and alternative reduction methods to address this limitation.
 
 This three different type of approaches were designed to work together. While UDR generates a working policy for PPO, considering a low mean reward, the other two algorithms improve the mean reward value, but are not able to find a working policy. The next three approaches are different combinations of the previous three algorithms.
 
@@ -408,28 +522,28 @@ The next set of experiments was conducted using the Exploration Uniform Domain R
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_EU_Source.png}
-        \caption{Figure 17. SAC Source Domain with EUDR}
+        \caption{Figure 25. SAC Source Domain with EUDR}
         \label{fig:sac_source_eudr}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_EU_Target.png}
-        \caption{Figure 18. SAC Target Domain with EUDR}
+        \caption{Figure 26. SAC Target Domain with EUDR}
         \label{fig:sac_target_eudr}
     \end{minipage}
     \vfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_EU_Source.png}
-        \caption{Figure 19. PPO Source Domain with EUDR}
+        \caption{Figure 27. PPO Source Domain with EUDR}
         \label{fig:ppo_source_eudr}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_EU_Target.png}
-        \caption{Figure 20. PPO Target Domain with EUDR}
+        \caption{Figure 28. PPO Target Domain with EUDR}
         \label{fig:ppo_target_eudr}
     \end{minipage}
 \end{figure}
@@ -454,11 +568,11 @@ In the following table, I report the mean reward and standard deviation obtained
 
 The EUDR approach divides the training process into three distinct phases, each focusing on a specific goal: exploration, controlled randomization, and exploitation. The structured progression of phases allows the agent to adapt to different dynamics over the course of training, balancing exploration and exploitation. The initial exploration phase encourages the agent to explore a wide range of dynamics, while the controlled randomization phase narrows the focus to more stable environments. The exploitation phase further refines the policy for optimal performance. This structured approach helps the agent learn robust policies that generalize well across domains, improving adaptability and performance.
 
-The results show the behaviour of the two different models. While SAC reaches good mean reward values considering all the three evaluations, it sufferes of high standard deviation. The rendering show that it is not able to find a good policy that moves correctly the hopper. On the other hand PPO reaches good mean reward values in all the three evaluations and more stable results. The rendering of these results shows a perfectly working hopper considering both the source environment and the target environment. 
+The results show different behaviours of the two models. While SAC reaches good mean reward values considering all the three evaluations, it sufferes of high standard deviation. The rendering show that it is not able to find a good policy that moves correctly the hopper. On the other hand, PPO reaches good mean reward values in all the three evaluations and more stable results. The rendering of these results shows a perfectly working hopper considering both the source environment and the target environment. 
 
-In this case, the difference in the behaviour is related to the nature of the two algorithms. SAC, being an off-policy algorithm, allows for more exploration but may also be less efficient at exploiting good solutions when confronted with shifts in the domain (such as the torso mass change). This can lead to variability in its performance and high standard deviation. The increment phase of the EUDR might lead SAC to explore too broadly early on, causing instability. Since SAC relies on a replay buffer, sampling random experiences may not always lead to a coherent policy that adapts well to the target domain. Even as SAC moves into the reducing and uniform phases, where the exploration is tempered, the standard deviation remains high. This is likely because SAC’s off-policy nature requires more extensive exploration, which can fail to stabilize as it is tested on the target domain, resulting in fluctuating performance.
+The difference in behavior can be attributed to the nature of the two algorithms. SAC, as an off-policy algorithm, promotes extensive exploration but may struggle to efficiently exploit good solutions when faced with domain shifts (e.g., torso mass changes). This tendency can result in variability in performance and high standard deviation. During the increment phase of EUDR, SAC's broad exploration is amplified, potentially leading to instability early in training. Furthermore, SAC's reliance on a replay buffer means it samples from a diverse mix of transitions, which may include outdated or irrelevant experiences, hindering the development of a coherent policy suited to the target domain. Even as SAC progresses through the reducing and uniform phases, its off-policy nature and extensive exploration may prevent sufficient stabilization, resulting in fluctuating performance and persistently high standard deviation.
 
-PPO, being an on-policy algorithm, is more stable and efficient at exploiting good solutions. This allows it to learn a policy that generalizes well to the target domain, even with the exploration in the increment phase of the EUDR. PPO’s stability and efficiency in learning help it adapt to the target domain more effectively, leading to better performance and lower standard deviation. The structured progression of exploration and exploitation phases in the EUDR approach helps PPO balance exploration and exploitation, leading to more robust and generalizable policies.
+PPO, due to the fact that it is an on-policy algorithm, is more stable and efficient at exploiting good solutions. This allows it to learn a policy that generalizes well to the target domain, even with the exploration in the increment phase of the EUDR. PPO’s stability and efficiency in learning help it adapt to the target domain more effectively, leading to better performance and lower standard deviation. The structured progression of exploration and exploitation phases in the EUDR approach helps PPO balance exploration and exploitation, leading to more robust and generalizable policies.
 
 \subsection{Dynamic Range Cycle Domain Randomization (DRC)}
 
@@ -469,28 +583,28 @@ The next set of experiments was conducted using the Dynamic Range Cycle Domain R
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_DRC_Source.png}
-        \caption{Figure 21. SAC Source Domain with DRC}
+        \caption{Figure 29. SAC Source Domain with DRC}
         \label{fig:sac_source_drc}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_DRC_Target.png}
-        \caption{Figure 22. SAC Target Domain with DRC}
+        \caption{Figure 30. SAC Target Domain with DRC}
         \label{fig:sac_target_drc}
     \end{minipage}
     \vfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_DRC_Source.png}
-        \caption{Figure 23. PPO Source Domain with DRC}
+        \caption{Figure 31. PPO Source Domain with DRC}
         \label{fig:ppo_source_drc}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_DRC_Target.png}
-        \caption{Figure 24. PPO Target Domain with DRC}
+        \caption{Figure 32. PPO Target Domain with DRC}
         \label{fig:ppo_target_drc}
     \end{minipage}
 \end{figure}
@@ -515,7 +629,7 @@ In the following table, I report the mean reward and standard deviation obtained
 
 This approach is different from the previous one. The DRC approach focuses on cycling through different ranges of randomization, allowing the agent to explore a wide variety of dynamics over the course of training. Starting with fixed ranges in the early stages of training, the agent learns a stable policy that generalizes well to the source domain. As the training progresses, the ranges expand to encourage exploration of more diverse environments. Then, the reduction of ranges helps the agent focus on more stable conditions, improving its adaptability and robustness. This cycling through different ranges helps the agent balance exploration and exploitation, leading to more robust and generalizable policies.
 
-Also in this case, the results describe perfectly the behaviour that can be seen in the renderings. SAC is not able to find a good policy that moves correctly the hopper in both the source and the target domain, reaching the worst behaviour since now. All the tests episodes failed after 2 hopper steps. The mean reward values are lower compared to the results obtained with the other domain randomization techniques. On the other hand, PPO is able to find a good policy that moves correctly the hopper in both the source and the target domain. The mean reward values are higher compared to the results obtained with the other domain randomization techniques, but the high variance in the source to target environment is caused by few fails during the test episodes.
+Also in this case, the results describe perfectly the behaviour that can be seen in the renderings. SAC is not able to find a good policy that moves correctly the hopper in both the source and the target domain, reaching the worst behaviour since now. All the tests episodes failed after two hopper steps. The mean reward values are lower compared to the results obtained with the other domain randomization techniques. On the other hand, PPO is able to find a good policy that moves correctly the hopper in both the source and the target domain. The mean reward values are higher compared to the results obtained with the other domain randomization techniques, but the high variance in the source to target environment is caused by few fails during the test episodes.
 
 SAC is unable to adapt well to the dynamic changes introduced by the randomization phases, particularly during the uniform phase at the beginning, which may make it difficult for SAC to develop a meaningful policy due to the wide randomization ranges.
 The high values assigned to the entropy coefficient in the increment phase and uniform phase likely encourage the agent to explore too broadly, without converging on a good solution. 
@@ -532,28 +646,28 @@ The next and last set of experiments was conducted using the Dynamic Exploration
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_DE_Source.png}
-        \caption{Figure 25. SAC Source Domain with DEDR}
+        \caption{Figure 33. SAC Source Domain with DEDR}
         \label{fig:sac_source_dedr}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_DE_Target.png}
-        \caption{Figure 26. SAC Target Domain with DEDR}
+        \caption{Figure 34. SAC Target Domain with DEDR}
         \label{fig:sac_target_dedr}
     \end{minipage}
     \vfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_DE_Source.png}
-        \caption{Figure 27. PPO Source Domain with DEDR}
+        \caption{Figure 35. PPO Source Domain with DEDR}
         \label{fig:ppo_source_dedr}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_DE_Target.png}
-        \caption{Figure 28. PPO Target Domain with DEDR}
+        \caption{Figure 36. PPO Target Domain with DEDR}
         \label{fig:ppo_target_dedr}
     \end{minipage}
 \end{figure}
@@ -585,7 +699,7 @@ SAC shows a significant improvement in the mean reward and standard deviation un
 
 In this work, I have presented a comprehensive evaluation of different domain randomization techniques for training reinforcement learning agents in the Hopper environment. I have tested six different domain randomization techniques, including Uniform Domain Randomization (UDR), Reducing Ranged Domain Randomization (RRDR), Incremental Ranges Expansion Domain Randomization (IRE), Exploration Uniform Domain Randomization (EUDR), Dynamic Range Cycle Domain Randomization (DRC), and Dynamic Exploration Domain Randomization (DEDR). I have evaluated the performance of two reinforcement learning algorithms, Soft Actor-Critic (SAC) and Proximal Policy Optimization (PPO), in the source and target domains using these domain randomization techniques.
 
-The results show that PPO outperforms SAC in terms of generalization across domains, achieving higher mean rewards and lower standard deviations in the target domain. PPO's stability and efficiency in learning allow it to adapt more effectively to changes in the environment, leading to better performance and robustness. SAC, on the other hand, struggles to generalize across domains due to its sensitivity to changes in the environment and limited exploration capabilities. The domain randomization techniques help improve the generalization capabilities of both algorithms, allowing them to adapt to different dynamics and environments.
+The results show that PPO outperforms SAC in terms of generalization across domains, achieving higher mean rewards and lower standard deviations in the target domain. PPO's stability and efficiency in learning allows it to adapt more effectively to changes in the environment, leading to better performance and robustness. SAC, on the other hand, struggles to generalize across domains due to its sensitivity to changes in the environment and limited exploration capabilities. The domain randomization techniques help improve the generalization capabilities of both algorithms, allowing them to adapt to different dynamics and environments.
 
 Among the domain randomization techniques tested, EUDR and DEDR show the best results in terms of mean reward and standard deviation for both SAC and PPO. These techniques provide a structured progression of exploration and exploitation phases, allowing the agents to adapt to different dynamics over the course of training. The balanced approach to domain randomization helps the agents learn more robust policies that generalize well across domains, improving adaptability and performance.
 

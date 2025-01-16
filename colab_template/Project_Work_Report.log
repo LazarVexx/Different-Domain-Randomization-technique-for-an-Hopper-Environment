@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.12.3)  13 JAN 2025 13:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.12.3)  16 JAN 2025 20:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -241,7 +241,23 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count298
 \l__pdf_internal_box=\box56
-) (Project_Work_Report.aux)
+) (Project_Work_Report.aux
+
+LaTeX Warning: Label `fig:sac_source_udr_larger' multiply defined.
+
+
+LaTeX Warning: Label `fig:sac_target_udr_larger' multiply defined.
+
+
+LaTeX Warning: Label `fig:ppo_source_udr_larger' multiply defined.
+
+
+LaTeX Warning: Label `fig:ppo_target_udr_larger' multiply defined.
+
+
+LaTeX Warning: Label `tab:results_udr_larger' multiply defined.
+
+)
 \openout1 = `Project_Work_Report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
@@ -338,24 +354,24 @@ Package hyperref Info: Link coloring OFF on input line 14.
 [6]
 
 [7]
-<../images/Learning_Curve_SAC_no_rand_Source.png, id=138, 462.528pt x 346.896pt>
+<../images/Learning_Curve_SAC_no_rand_Source.png, id=140, 462.528pt x 346.896pt>
 File: ../images/Learning_Curve_SAC_no_rand_Source.png Graphic file (type png)
 <use ../images/Learning_Curve_SAC_no_rand_Source.png>
-Package pdftex.def Info: ../images/Learning_Curve_SAC_no_rand_Source.png  used on input line 163.
+Package pdftex.def Info: ../images/Learning_Curve_SAC_no_rand_Source.png  used on input line 165.
 (pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
-<../images/Learning_Curve_SAC_no_rand_Target.png, id=140, 462.528pt x 346.896pt>
+<../images/Learning_Curve_SAC_no_rand_Target.png, id=142, 462.528pt x 346.896pt>
 File: ../images/Learning_Curve_SAC_no_rand_Target.png Graphic file (type png)
 <use ../images/Learning_Curve_SAC_no_rand_Target.png>
-Package pdftex.def Info: ../images/Learning_Curve_SAC_no_rand_Target.png  used on input line 170.
+Package pdftex.def Info: ../images/Learning_Curve_SAC_no_rand_Target.png  used on input line 172.
 (pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
-<../images/Learning_Curve_PPO_no_rand_Source.png, id=141, 462.528pt x 346.896pt>
+<../images/Learning_Curve_PPO_no_rand_Source.png, id=143, 462.528pt x 346.896pt>
 File: ../images/Learning_Curve_PPO_no_rand_Source.png Graphic file (type png)
 <use ../images/Learning_Curve_PPO_no_rand_Source.png>
-Package pdftex.def Info: ../images/Learning_Curve_PPO_no_rand_Source.png  used on input line 177.
+Package pdftex.def Info: ../images/Learning_Curve_PPO_no_rand_Source.png  used on input line 179.
 (pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
 File: ../images/Learning_Curve_PPO_no_rand_Source.png Graphic file (type png)
 <use ../images/Learning_Curve_PPO_no_rand_Source.png>
-Package pdftex.def Info: ../images/Learning_Curve_PPO_no_rand_Source.png  used on input line 184.
+Package pdftex.def Info: ../images/Learning_Curve_PPO_no_rand_Source.png  used on input line 186.
 (pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
 
 
@@ -365,47 +381,47 @@ Package pdftex.def Info: ../images/Learning_Curve_PPO_no_rand_Source.png  used o
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.210 I
+l.212 I
        n both cases the PPO algorithm has a lower mean reward and a lower st...
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.210 I
+l.212 I
        n both cases the PPO algorithm has a lower mean reward and a lower st...
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.210 I
+l.212 I
        n both cases the PPO algorithm has a lower mean reward and a lower st...
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.210 I
+l.212 I
        n both cases the PPO algorithm has a lower mean reward and a lower st...
 pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.210 I
+l.212 I
        n both cases the PPO algorithm has a lower mean reward and a lower st... <../images/Learning_Curve_SAC_no_rand_Source.png> <../images/Learning_Curve_SAC_no_rand_Target.png> <../images/Learning_Curve_PPO_no_rand_Source.png>]
-<../images/Learning_Curve_SAC_Uniform_Source.png, id=159, 462.528pt x 346.896pt>
+<../images/Learning_Curve_SAC_Uniform_Source.png, id=161, 462.528pt x 346.896pt>
 File: ../images/Learning_Curve_SAC_Uniform_Source.png Graphic file (type png)
 <use ../images/Learning_Curve_SAC_Uniform_Source.png>
-Package pdftex.def Info: ../images/Learning_Curve_SAC_Uniform_Source.png  used on input line 226.
+Package pdftex.def Info: ../images/Learning_Curve_SAC_Uniform_Source.png  used on input line 228.
 (pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
-<../images/Learning_Curve_SAC_Uniform_Target.png, id=160, 462.528pt x 346.896pt>
+<../images/Learning_Curve_SAC_Uniform_Target.png, id=162, 462.528pt x 346.896pt>
 File: ../images/Learning_Curve_SAC_Uniform_Target.png Graphic file (type png)
 <use ../images/Learning_Curve_SAC_Uniform_Target.png>
-Package pdftex.def Info: ../images/Learning_Curve_SAC_Uniform_Target.png  used on input line 233.
+Package pdftex.def Info: ../images/Learning_Curve_SAC_Uniform_Target.png  used on input line 235.
 (pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
-<../images/Learning_Curve_PPO_Uniform_Source.png, id=161, 462.528pt x 346.896pt>
+<../images/Learning_Curve_PPO_Uniform_Source.png, id=163, 462.528pt x 346.896pt>
 File: ../images/Learning_Curve_PPO_Uniform_Source.png Graphic file (type png)
 <use ../images/Learning_Curve_PPO_Uniform_Source.png>
-Package pdftex.def Info: ../images/Learning_Curve_PPO_Uniform_Source.png  used on input line 240.
+Package pdftex.def Info: ../images/Learning_Curve_PPO_Uniform_Source.png  used on input line 242.
 (pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
-<../images/Learning_Curve_PPO_Uniform_Target.png, id=162, 462.528pt x 346.896pt>
+<../images/Learning_Curve_PPO_Uniform_Target.png, id=164, 462.528pt x 346.896pt>
 File: ../images/Learning_Curve_PPO_Uniform_Target.png Graphic file (type png)
 <use ../images/Learning_Curve_PPO_Uniform_Target.png>
-Package pdftex.def Info: ../images/Learning_Curve_PPO_Uniform_Target.png  used on input line 247.
+Package pdftex.def Info: ../images/Learning_Curve_PPO_Uniform_Target.png  used on input line 249.
 (pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
 
 
@@ -415,305 +431,407 @@ Package pdftex.def Info: ../images/Learning_Curve_PPO_Uniform_Target.png  used o
 pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.272 
+l.274 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.272 
+l.274 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.7}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.272 
+l.274 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.8}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.272 
+l.274 
       
 pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.272 
+l.274 
        <../images/Learning_Curve_SAC_Uniform_Source.png> <../images/Learning_Curve_SAC_Uniform_Target.png> <../images/Learning_Curve_PPO_Uniform_Source.png> <../images/Learning_Curve_PPO_Uniform_Target.png>]
+<../images/Learning_Curve_SAC_Uniform_Medium_Source.png, id=182, 462.528pt x 346.896pt>
+File: ../images/Learning_Curve_SAC_Uniform_Medium_Source.png Graphic file (type png)
+<use ../images/Learning_Curve_SAC_Uniform_Medium_Source.png>
+Package pdftex.def Info: ../images/Learning_Curve_SAC_Uniform_Medium_Source.png  used on input line 291.
+(pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
+<../images/Learning_Curve_SAC_Uniform_Medium_Target.png, id=183, 462.528pt x 346.896pt>
+File: ../images/Learning_Curve_SAC_Uniform_Medium_Target.png Graphic file (type png)
+<use ../images/Learning_Curve_SAC_Uniform_Medium_Target.png>
+Package pdftex.def Info: ../images/Learning_Curve_SAC_Uniform_Medium_Target.png  used on input line 298.
+(pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
+<../images/Learning_Curve_PPO_Uniform_Medium_Source.png, id=184, 462.528pt x 346.896pt>
+File: ../images/Learning_Curve_PPO_Uniform_Medium_Source.png Graphic file (type png)
+<use ../images/Learning_Curve_PPO_Uniform_Medium_Source.png>
+Package pdftex.def Info: ../images/Learning_Curve_PPO_Uniform_Medium_Source.png  used on input line 305.
+(pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
+<../images/Learning_Curve_PPO_Uniform_Medium_Target.png, id=185, 462.528pt x 346.896pt>
+File: ../images/Learning_Curve_PPO_Uniform_Medium_Target.png Graphic file (type png)
+<use ../images/Learning_Curve_PPO_Uniform_Medium_Target.png>
+Package pdftex.def Info: ../images/Learning_Curve_PPO_Uniform_Medium_Target.png  used on input line 312.
+(pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
+
 
 [12]
-<../images/Learning_Curve_SAC_Reducing_Source.png, id=184, 462.528pt x 346.896pt>
-File: ../images/Learning_Curve_SAC_Reducing_Source.png Graphic file (type png)
-<use ../images/Learning_Curve_SAC_Reducing_Source.png>
-Package pdftex.def Info: ../images/Learning_Curve_SAC_Reducing_Source.png  used on input line 293.
-(pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
-<../images/Learning_Curve_SAC_Reducing_Target.png, id=185, 462.528pt x 346.896pt>
-File: ../images/Learning_Curve_SAC_Reducing_Target.png Graphic file (type png)
-<use ../images/Learning_Curve_SAC_Reducing_Target.png>
-Package pdftex.def Info: ../images/Learning_Curve_SAC_Reducing_Target.png  used on input line 300.
-(pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
-<../images/Learning_curve_PPO_reducing_Source.png, id=186, 462.528pt x 346.896pt>
-File: ../images/Learning_curve_PPO_reducing_Source.png Graphic file (type png)
-<use ../images/Learning_curve_PPO_reducing_Source.png>
-Package pdftex.def Info: ../images/Learning_curve_PPO_reducing_Source.png  used on input line 307.
-(pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
-<../images/Learning_curve_PPO_reducing_Target.png, id=187, 462.528pt x 346.896pt>
-File: ../images/Learning_curve_PPO_reducing_Target.png Graphic file (type png)
-<use ../images/Learning_curve_PPO_reducing_Target.png>
-Package pdftex.def Info: ../images/Learning_curve_PPO_reducing_Target.png  used on input line 314.
-(pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
-
 
 [13
 pdfTeX warning (ext4): destination with the same identifier (name{figure.9}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.340 
+l.337 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.10}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.340 
+l.337 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.11}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.340 
+l.337 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.12}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.340 
+l.337 
       
 pdfTeX warning (ext4): destination with the same identifier (name{table.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.340 
-       <../images/Learning_Curve_SAC_Reducing_Source.png> <../images/Learning_Curve_SAC_Reducing_Target.png> <../images/Learning_curve_PPO_reducing_Source.png> <../images/Learning_curve_PPO_reducing_Target.png>]
-Overfull \hbox (13.95332pt too wide) in paragraph at lines 343--343
-[]\OT1/cmr/bx/n/14.4 Incremental Ranges Ex-pan-sion Do-main Ran-dom-iza-tion (IRE) 
- []
-
-<../images/Learning_Curve_SAC_Incremental_Source.png, id=202, 462.528pt x 346.896pt>
-File: ../images/Learning_Curve_SAC_Incremental_Source.png Graphic file (type png)
-<use ../images/Learning_Curve_SAC_Incremental_Source.png>
-Package pdftex.def Info: ../images/Learning_Curve_SAC_Incremental_Source.png  used on input line 351.
+l.337 
+       <../images/Learning_Curve_SAC_Uniform_Medium_Source.png> <../images/Learning_Curve_SAC_Uniform_Medium_Target.png> <../images/Learning_Curve_PPO_Uniform_Medium_Source.png> <../images/Learning_Curve_PPO_Uniform_Medium_Target.png>]
+<../images/Learning_Curve_SAC_Uniform_Large_Source.png, id=204, 462.528pt x 346.896pt>
+File: ../images/Learning_Curve_SAC_Uniform_Large_Source.png Graphic file (type png)
+<use ../images/Learning_Curve_SAC_Uniform_Large_Source.png>
+Package pdftex.def Info: ../images/Learning_Curve_SAC_Uniform_Large_Source.png  used on input line 344.
 (pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
-<../images/Learning_Curve_SAC_Incremental_Target.png, id=203, 462.528pt x 346.896pt>
-File: ../images/Learning_Curve_SAC_Incremental_Target.png Graphic file (type png)
-<use ../images/Learning_Curve_SAC_Incremental_Target.png>
-Package pdftex.def Info: ../images/Learning_Curve_SAC_Incremental_Target.png  used on input line 358.
+<../images/Learning_Curve_SAC_Uniform_Large_Target.png, id=205, 462.528pt x 346.896pt>
+File: ../images/Learning_Curve_SAC_Uniform_Large_Target.png Graphic file (type png)
+<use ../images/Learning_Curve_SAC_Uniform_Large_Target.png>
+Package pdftex.def Info: ../images/Learning_Curve_SAC_Uniform_Large_Target.png  used on input line 351.
 (pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
-<../images/Learning_Curve_PPO_Incremental_Source.png, id=204, 462.528pt x 346.896pt>
-File: ../images/Learning_Curve_PPO_Incremental_Source.png Graphic file (type png)
-<use ../images/Learning_Curve_PPO_Incremental_Source.png>
-Package pdftex.def Info: ../images/Learning_Curve_PPO_Incremental_Source.png  used on input line 365.
+<../images/Learning_Curve_PPO_Uniform_Large_Source.png, id=206, 462.528pt x 346.896pt>
+File: ../images/Learning_Curve_PPO_Uniform_Large_Source.png Graphic file (type png)
+<use ../images/Learning_Curve_PPO_Uniform_Large_Source.png>
+Package pdftex.def Info: ../images/Learning_Curve_PPO_Uniform_Large_Source.png  used on input line 358.
 (pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
-<../images/Learning_Curve_PPO_Incremental_Target.png, id=205, 462.528pt x 346.896pt>
-File: ../images/Learning_Curve_PPO_Incremental_Target.png Graphic file (type png)
-<use ../images/Learning_Curve_PPO_Incremental_Target.png>
-Package pdftex.def Info: ../images/Learning_Curve_PPO_Incremental_Target.png  used on input line 372.
+<../images/Learning_Curve_PPO_Uniform_Large_Target.png, id=207, 462.528pt x 346.896pt>
+File: ../images/Learning_Curve_PPO_Uniform_Large_Target.png Graphic file (type png)
+<use ../images/Learning_Curve_PPO_Uniform_Large_Target.png>
+Package pdftex.def Info: ../images/Learning_Curve_PPO_Uniform_Large_Target.png  used on input line 365.
 (pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
 
 
-[14]
-
-[15
+[14
 pdfTeX warning (ext4): destination with the same identifier (name{figure.13}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.397 
+l.388 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.14}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.397 
+l.388 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.15}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.397 
+l.388 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.16}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.397 
-      
+l.388 
+       <../images/Learning_Curve_SAC_Uniform_Large_Source.png> <../images/Learning_Curve_SAC_Uniform_Large_Target.png> <../images/Learning_Curve_PPO_Uniform_Large_Source.png> <../images/Learning_Curve_PPO_Uniform_Large_Target.png>]
+
+[15
 pdfTeX warning (ext4): destination with the same identifier (name{table.4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.397 
-       <../images/Learning_Curve_SAC_Incremental_Source.png> <../images/Learning_Curve_SAC_Incremental_Target.png> <../images/Learning_Curve_PPO_Incremental_Source.png> <../images/Learning_Curve_PPO_Incremental_Target.png>]
-<../images/Learning_Curve_SAC_EU_Source.png, id=223, 462.528pt x 346.896pt>
-File: ../images/Learning_Curve_SAC_EU_Source.png Graphic file (type png)
-<use ../images/Learning_Curve_SAC_EU_Source.png>
-Package pdftex.def Info: ../images/Learning_Curve_SAC_EU_Source.png  used on input line 410.
+l.402 
+      ]
+<../images/Learning_Curve_SAC_Reducing_Source.png, id=225, 462.528pt x 346.896pt>
+File: ../images/Learning_Curve_SAC_Reducing_Source.png Graphic file (type png)
+<use ../images/Learning_Curve_SAC_Reducing_Source.png>
+Package pdftex.def Info: ../images/Learning_Curve_SAC_Reducing_Source.png  used on input line 407.
 (pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
-<../images/Learning_Curve_SAC_EU_Target.png, id=224, 462.528pt x 346.896pt>
-File: ../images/Learning_Curve_SAC_EU_Target.png Graphic file (type png)
-<use ../images/Learning_Curve_SAC_EU_Target.png>
-Package pdftex.def Info: ../images/Learning_Curve_SAC_EU_Target.png  used on input line 417.
+<../images/Learning_Curve_SAC_Reducing_Target.png, id=226, 462.528pt x 346.896pt>
+File: ../images/Learning_Curve_SAC_Reducing_Target.png Graphic file (type png)
+<use ../images/Learning_Curve_SAC_Reducing_Target.png>
+Package pdftex.def Info: ../images/Learning_Curve_SAC_Reducing_Target.png  used on input line 414.
 (pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
-<../images/Learning_Curve_PPO_EU_Source.png, id=225, 462.528pt x 346.896pt>
-File: ../images/Learning_Curve_PPO_EU_Source.png Graphic file (type png)
-<use ../images/Learning_Curve_PPO_EU_Source.png>
-Package pdftex.def Info: ../images/Learning_Curve_PPO_EU_Source.png  used on input line 424.
+<../images/Learning_curve_PPO_reducing_Source.png, id=227, 462.528pt x 346.896pt>
+File: ../images/Learning_curve_PPO_reducing_Source.png Graphic file (type png)
+<use ../images/Learning_curve_PPO_reducing_Source.png>
+Package pdftex.def Info: ../images/Learning_curve_PPO_reducing_Source.png  used on input line 421.
 (pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
-<../images/Learning_Curve_PPO_EU_Target.png, id=226, 462.528pt x 346.896pt>
-File: ../images/Learning_Curve_PPO_EU_Target.png Graphic file (type png)
-<use ../images/Learning_Curve_PPO_EU_Target.png>
-Package pdftex.def Info: ../images/Learning_Curve_PPO_EU_Target.png  used on input line 431.
+<../images/Learning_curve_PPO_reducing_Target.png, id=228, 462.528pt x 346.896pt>
+File: ../images/Learning_curve_PPO_reducing_Target.png Graphic file (type png)
+<use ../images/Learning_curve_PPO_reducing_Target.png>
+Package pdftex.def Info: ../images/Learning_curve_PPO_reducing_Target.png  used on input line 428.
 (pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
 
 
-[16]
-
-[17
+[16
 pdfTeX warning (ext4): destination with the same identifier (name{figure.17}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.456 
+l.454 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.18}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.456 
+l.454 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.19}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.456 
+l.454 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.20}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.456 
+l.454 
       
 pdfTeX warning (ext4): destination with the same identifier (name{table.5}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.456 
-       <../images/Learning_Curve_SAC_EU_Source.png> <../images/Learning_Curve_SAC_EU_Target.png> <../images/Learning_Curve_PPO_EU_Source.png> <../images/Learning_Curve_PPO_EU_Target.png>]
-<../images/Learning_Curve_SAC_DRC_Source.png, id=244, 462.528pt x 346.896pt>
-File: ../images/Learning_Curve_SAC_DRC_Source.png Graphic file (type png)
-<use ../images/Learning_Curve_SAC_DRC_Source.png>
-Package pdftex.def Info: ../images/Learning_Curve_SAC_DRC_Source.png  used on input line 471.
+l.454 
+       <../images/Learning_Curve_SAC_Reducing_Source.png> <../images/Learning_Curve_SAC_Reducing_Target.png> <../images/Learning_curve_PPO_reducing_Source.png> <../images/Learning_curve_PPO_reducing_Target.png>]
+Overfull \hbox (13.95332pt too wide) in paragraph at lines 457--457
+[]\OT1/cmr/bx/n/14.4 Incremental Ranges Ex-pan-sion Do-main Ran-dom-iza-tion (IRE) 
+ []
+
+<../images/Learning_Curve_SAC_Incremental_Source.png, id=242, 462.528pt x 346.896pt>
+File: ../images/Learning_Curve_SAC_Incremental_Source.png Graphic file (type png)
+<use ../images/Learning_Curve_SAC_Incremental_Source.png>
+Package pdftex.def Info: ../images/Learning_Curve_SAC_Incremental_Source.png  used on input line 465.
 (pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
-<../images/Learning_Curve_SAC_DRC_Target.png, id=245, 462.528pt x 346.896pt>
-File: ../images/Learning_Curve_SAC_DRC_Target.png Graphic file (type png)
-<use ../images/Learning_Curve_SAC_DRC_Target.png>
-Package pdftex.def Info: ../images/Learning_Curve_SAC_DRC_Target.png  used on input line 478.
+<../images/Learning_Curve_SAC_Incremental_Target.png, id=243, 462.528pt x 346.896pt>
+File: ../images/Learning_Curve_SAC_Incremental_Target.png Graphic file (type png)
+<use ../images/Learning_Curve_SAC_Incremental_Target.png>
+Package pdftex.def Info: ../images/Learning_Curve_SAC_Incremental_Target.png  used on input line 472.
 (pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
-<../images/Learning_Curve_PPO_DRC_Source.png, id=246, 462.528pt x 346.896pt>
-File: ../images/Learning_Curve_PPO_DRC_Source.png Graphic file (type png)
-<use ../images/Learning_Curve_PPO_DRC_Source.png>
-Package pdftex.def Info: ../images/Learning_Curve_PPO_DRC_Source.png  used on input line 485.
+<../images/Learning_Curve_PPO_Incremental_Source.png, id=244, 462.528pt x 346.896pt>
+File: ../images/Learning_Curve_PPO_Incremental_Source.png Graphic file (type png)
+<use ../images/Learning_Curve_PPO_Incremental_Source.png>
+Package pdftex.def Info: ../images/Learning_Curve_PPO_Incremental_Source.png  used on input line 479.
 (pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
-<../images/Learning_Curve_PPO_DRC_Target.png, id=247, 462.528pt x 346.896pt>
-File: ../images/Learning_Curve_PPO_DRC_Target.png Graphic file (type png)
-<use ../images/Learning_Curve_PPO_DRC_Target.png>
-Package pdftex.def Info: ../images/Learning_Curve_PPO_DRC_Target.png  used on input line 492.
+<../images/Learning_Curve_PPO_Incremental_Target.png, id=245, 462.528pt x 346.896pt>
+File: ../images/Learning_Curve_PPO_Incremental_Target.png Graphic file (type png)
+<use ../images/Learning_Curve_PPO_Incremental_Target.png>
+Package pdftex.def Info: ../images/Learning_Curve_PPO_Incremental_Target.png  used on input line 486.
 (pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
 
 
-[18]
+[17]
 
-[19
+[18
 pdfTeX warning (ext4): destination with the same identifier (name{figure.21}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.517 
+l.511 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.22}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.517 
+l.511 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.23}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.517 
+l.511 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.24}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.517 
+l.511 
       
 pdfTeX warning (ext4): destination with the same identifier (name{table.6}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.517 
-       <../images/Learning_Curve_SAC_DRC_Source.png> <../images/Learning_Curve_SAC_DRC_Target.png> <../images/Learning_Curve_PPO_DRC_Source.png> <../images/Learning_Curve_PPO_DRC_Target.png>]
-<../images/Learning_Curve_SAC_DE_Source.png, id=266, 462.528pt x 346.896pt>
-File: ../images/Learning_Curve_SAC_DE_Source.png Graphic file (type png)
-<use ../images/Learning_Curve_SAC_DE_Source.png>
-Package pdftex.def Info: ../images/Learning_Curve_SAC_DE_Source.png  used on input line 534.
+l.511 
+       <../images/Learning_Curve_SAC_Incremental_Source.png> <../images/Learning_Curve_SAC_Incremental_Target.png> <../images/Learning_Curve_PPO_Incremental_Source.png> <../images/Learning_Curve_PPO_Incremental_Target.png>]
+<../images/Learning_Curve_SAC_EU_Source.png, id=263, 462.528pt x 346.896pt>
+File: ../images/Learning_Curve_SAC_EU_Source.png Graphic file (type png)
+<use ../images/Learning_Curve_SAC_EU_Source.png>
+Package pdftex.def Info: ../images/Learning_Curve_SAC_EU_Source.png  used on input line 524.
 (pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
-<../images/Learning_Curve_SAC_DE_Target.png, id=267, 462.528pt x 346.896pt>
-File: ../images/Learning_Curve_SAC_DE_Target.png Graphic file (type png)
-<use ../images/Learning_Curve_SAC_DE_Target.png>
-Package pdftex.def Info: ../images/Learning_Curve_SAC_DE_Target.png  used on input line 541.
+<../images/Learning_Curve_SAC_EU_Target.png, id=264, 462.528pt x 346.896pt>
+File: ../images/Learning_Curve_SAC_EU_Target.png Graphic file (type png)
+<use ../images/Learning_Curve_SAC_EU_Target.png>
+Package pdftex.def Info: ../images/Learning_Curve_SAC_EU_Target.png  used on input line 531.
 (pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
-<../images/Learning_Curve_PPO_DE_Source.png, id=268, 462.528pt x 346.896pt>
-File: ../images/Learning_Curve_PPO_DE_Source.png Graphic file (type png)
-<use ../images/Learning_Curve_PPO_DE_Source.png>
-Package pdftex.def Info: ../images/Learning_Curve_PPO_DE_Source.png  used on input line 548.
+<../images/Learning_Curve_PPO_EU_Source.png, id=265, 462.528pt x 346.896pt>
+File: ../images/Learning_Curve_PPO_EU_Source.png Graphic file (type png)
+<use ../images/Learning_Curve_PPO_EU_Source.png>
+Package pdftex.def Info: ../images/Learning_Curve_PPO_EU_Source.png  used on input line 538.
 (pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
-<../images/Learning_Curve_PPO_DE_Target.png, id=269, 462.528pt x 346.896pt>
-File: ../images/Learning_Curve_PPO_DE_Target.png Graphic file (type png)
-<use ../images/Learning_Curve_PPO_DE_Target.png>
-Package pdftex.def Info: ../images/Learning_Curve_PPO_DE_Target.png  used on input line 555.
+<../images/Learning_Curve_PPO_EU_Target.png, id=266, 462.528pt x 346.896pt>
+File: ../images/Learning_Curve_PPO_EU_Target.png Graphic file (type png)
+<use ../images/Learning_Curve_PPO_EU_Target.png>
+Package pdftex.def Info: ../images/Learning_Curve_PPO_EU_Target.png  used on input line 545.
 (pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
 
 
-[20]
+[19]
 
-[21
+[20
 pdfTeX warning (ext4): destination with the same identifier (name{figure.25}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.581 
+l.570 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.26}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.581 
+l.570 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.27}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.581 
+l.570 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.28}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.581 
+l.570 
       
 pdfTeX warning (ext4): destination with the same identifier (name{table.7}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.581 
+l.570 
+       <../images/Learning_Curve_SAC_EU_Source.png> <../images/Learning_Curve_SAC_EU_Target.png> <../images/Learning_Curve_PPO_EU_Source.png> <../images/Learning_Curve_PPO_EU_Target.png>]
+<../images/Learning_Curve_SAC_DRC_Source.png, id=285, 462.528pt x 346.896pt>
+File: ../images/Learning_Curve_SAC_DRC_Source.png Graphic file (type png)
+<use ../images/Learning_Curve_SAC_DRC_Source.png>
+Package pdftex.def Info: ../images/Learning_Curve_SAC_DRC_Source.png  used on input line 585.
+(pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
+<../images/Learning_Curve_SAC_DRC_Target.png, id=286, 462.528pt x 346.896pt>
+File: ../images/Learning_Curve_SAC_DRC_Target.png Graphic file (type png)
+<use ../images/Learning_Curve_SAC_DRC_Target.png>
+Package pdftex.def Info: ../images/Learning_Curve_SAC_DRC_Target.png  used on input line 592.
+(pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
+<../images/Learning_Curve_PPO_DRC_Source.png, id=287, 462.528pt x 346.896pt>
+File: ../images/Learning_Curve_PPO_DRC_Source.png Graphic file (type png)
+<use ../images/Learning_Curve_PPO_DRC_Source.png>
+Package pdftex.def Info: ../images/Learning_Curve_PPO_DRC_Source.png  used on input line 599.
+(pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
+<../images/Learning_Curve_PPO_DRC_Target.png, id=288, 462.528pt x 346.896pt>
+File: ../images/Learning_Curve_PPO_DRC_Target.png Graphic file (type png)
+<use ../images/Learning_Curve_PPO_DRC_Target.png>
+Package pdftex.def Info: ../images/Learning_Curve_PPO_DRC_Target.png  used on input line 606.
+(pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
+
+
+[21]
+
+[22
+pdfTeX warning (ext4): destination with the same identifier (name{figure.29}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.631 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.30}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.631 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.31}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.631 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.32}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.631 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{table.8}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.631 
+       <../images/Learning_Curve_SAC_DRC_Source.png> <../images/Learning_Curve_SAC_DRC_Target.png> <../images/Learning_Curve_PPO_DRC_Source.png> <../images/Learning_Curve_PPO_DRC_Target.png>]
+<../images/Learning_Curve_SAC_DE_Source.png, id=306, 462.528pt x 346.896pt>
+File: ../images/Learning_Curve_SAC_DE_Source.png Graphic file (type png)
+<use ../images/Learning_Curve_SAC_DE_Source.png>
+Package pdftex.def Info: ../images/Learning_Curve_SAC_DE_Source.png  used on input line 648.
+(pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
+<../images/Learning_Curve_SAC_DE_Target.png, id=307, 462.528pt x 346.896pt>
+File: ../images/Learning_Curve_SAC_DE_Target.png Graphic file (type png)
+<use ../images/Learning_Curve_SAC_DE_Target.png>
+Package pdftex.def Info: ../images/Learning_Curve_SAC_DE_Target.png  used on input line 655.
+(pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
+<../images/Learning_Curve_PPO_DE_Source.png, id=308, 462.528pt x 346.896pt>
+File: ../images/Learning_Curve_PPO_DE_Source.png Graphic file (type png)
+<use ../images/Learning_Curve_PPO_DE_Source.png>
+Package pdftex.def Info: ../images/Learning_Curve_PPO_DE_Source.png  used on input line 662.
+(pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
+<../images/Learning_Curve_PPO_DE_Target.png, id=309, 462.528pt x 346.896pt>
+File: ../images/Learning_Curve_PPO_DE_Target.png Graphic file (type png)
+<use ../images/Learning_Curve_PPO_DE_Target.png>
+Package pdftex.def Info: ../images/Learning_Curve_PPO_DE_Target.png  used on input line 669.
+(pdftex.def)             Requested size: 203.83417pt x 152.87819pt.
+
+
+[23]
+
+[24
+pdfTeX warning (ext4): destination with the same identifier (name{figure.33}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.695 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.34}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.695 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.35}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.695 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.36}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.695 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{table.9}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.695 
        <../images/Learning_Curve_SAC_DE_Source.png> <../images/Learning_Curve_SAC_DE_Target.png> <../images/Learning_Curve_PPO_DE_Source.png> <../images/Learning_Curve_PPO_DE_Target.png>]
 
-[22]
+[25]
 
-[23] (Project_Work_Report.aux)
+[26] (Project_Work_Report.aux)
  ***********
 LaTeX2e <2024-11-01>
 L3 programming layer <2024-11-02>
  ***********
+
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `Project_Work_Report.out' has not changed.
-(rerunfilecheck)             Checksum: 5608A1F18C0754A2E2EFEA2CCBAC8D7B;4134.
+(rerunfilecheck)             Checksum: 0CD5D097A56B216FED1BB9F55C7BC9BE;4220.
  ) 
 Here is how much of TeX's memory you used:
- 10049 strings out of 473682
- 164019 string characters out of 5719216
- 562897 words of memory out of 5000000
- 32944 multiletter control sequences out of 15000+600000
+ 10122 strings out of 473682
+ 167620 string characters out of 5719216
+ 564355 words of memory out of 5000000
+ 33004 multiletter control sequences out of 15000+600000
  566169 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,9n,79p,2319b,561s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\lucai\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/lucai/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/lucai/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/lucai/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/lucai/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/lucai/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/lucai/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/lucai/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/lucai/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/lucai/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on Project_Work_Report.pdf (23 pages, 848342 bytes).
+Output written on Project_Work_Report.pdf (26 pages, 1041784 bytes).
 PDF statistics:
- 361 PDF objects out of 1000 (max. 8388607)
- 87 named destinations out of 1000 (max. 500000)
- 280 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 403 PDF objects out of 1000 (max. 8388607)
+ 100 named destinations out of 1000 (max. 500000)
+ 320 words of extra memory for PDF output out of 10000 (max. 10000000)
 
