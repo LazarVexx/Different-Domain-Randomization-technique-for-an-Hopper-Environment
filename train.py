@@ -62,23 +62,12 @@ def evaluate_model(model, env, n_eval_episodes, render):
     return mean_reward, std_reward
 
 def moving_average(values, window):
-    """
-    Smooth values by doing a moving average
-    :param values: (numpy array)
-    :param window: (int)
-    :return: (numpy array)
-    """
     weights = np.repeat(1.0, window) / window
     return np.convolve(values, weights, "valid")
 
 
 def plot_results(log_folder, model_name, randomization_type, label, randomization,  title="Learning Curve"):
-    """
-    plot the results
-
-    :param log_folder: (str) the save location of the results to plot
-    :param title: (str) the title of the task to plot
-    """
+    
     x, y = ts2xy(load_results(log_folder), "timesteps")
     y = moving_average(y, window=50)
     # Truncate x

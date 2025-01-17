@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
 
 \usepackage{amsmath}
 \usepackage{graphicx}
@@ -131,19 +131,19 @@ The first type of implemented domain adaptation technique is the Uniform Domain 
     \item Mass of the foot: 5.0893801
 \end{itemize}
 
-The ranges of the masses are defined considering the original values of the masses and create a range of values around the original values, considering as lower bound the original value less 0.2 and as upper bound the original value plus 0.2. The reason behind this choice is the consequence of different test done with SAC and PPO algorithm on ranges of larger values. In the experiment section, I have tested also large ranges (0.8 and 1.5).  In this tests, the agent was not able to learn a good policy in both the algorithms. Larger ranges introduce more diverse physical behaviors, making it harder for the policy to generalize across all possible configurations. Both SAC and PPO rely on exploration to find optimal actions. If the environment is too diverse, the agent may struggle to identify patterns that consistently lead to high rewards.
+The ranges of the masses are defined considering the original values of the masses and create a range of values around the original values, considering as lower bound the original value less 0.2 and as upper bound the original value plus 0.2. The reason behind this choice is the consequence of different test done with SAC and PPO algorithm on ranges of larger values. In the experiment section, I have tested also large ranges (0.8 and 1.5).  In this tests, the agent was not able to learn a good policy in both the algorithms. Larger ranges introduce more diverse physical behaviors, making it harder for the policy to generalize across all possible configurations. Both SAC and PPO rely on exploration to find optimal actions. If the environment is too diverse, the agent may struggle to identify patterns that consistently lead to high rewards.\\
 
-The second type of implemented domain randomization technique is based on the idea of starting with large ranges and reducing them as training progresses. The name associated with this algorithm is Reducing Ranged Domain Randomization (RRDR). This method calculates a dynamic factor, referred to as the RRDR factor, which decreases over time to progressively narrow the randomization ranges. At the start of training, large ranges are used to encourage exploration of diverse dynamics. The range expansion is applied only to the upper bound, while the lower bound remains fixed. These ranges are defined around the original masses of the thigh, leg, and foot, with initial bounds expanded by the RRDR factor. The RRDR factor is determined based on the current training progress: during the first 20\% of the total timesteps, large ranges are used with an upper-bound increment of 0.5. Following this phase, a logarithmic reduction is applied to the RRDR factor until 80\% of the total timesteps is reached. After this point, the increment becomes 0, and the ranges converge to those used in Uniform Domain Randomization (UDR). The mass for each body part is then sampled from a normal distribution, where the mean shifts toward the original mass values as training progresses, and the standard deviation decreases to focus the sampling range. This approach ensures that the agent is exposed to a wide variety of dynamics initially, while gradually narrowing the range toward the target domain, facilitating both exploration and fine-tuning during different phases of training.
+The second type of implemented domain randomization technique is based on the idea of starting with large ranges and reducing them as training progresses. The name associated with this algorithm is Reducing Ranged Domain Randomization (RRDR). This method calculates a dynamic factor, referred to as the RRDR factor, which decreases over time to progressively narrow the randomization ranges. At the start of training, large ranges are used to encourage exploration of diverse dynamics. The range expansion is applied only to the upper bound, while the lower bound remains fixed. These ranges are defined around the original masses of the thigh, leg, and foot, with initial bounds expanded by the RRDR factor. The RRDR factor is determined based on the current training progress: during the first 20\% of the total timesteps, large ranges are used with an upper-bound increment of 0.5. Following this phase, a logarithmic reduction is applied to the RRDR factor until 80\% of the total timesteps is reached. After this point, the increment becomes 0, and the ranges converge to those used in Uniform Domain Randomization (UDR). The mass for each body part is then sampled from a normal distribution, where the mean shifts toward the original mass values as training progresses, and the standard deviation decreases to focus the sampling range. This approach ensures that the agent is exposed to a wide variety of dynamics initially, while gradually narrowing the range toward the target domain, facilitating both exploration and fine-tuning during different phases of training.\\
 
-The third type of implemented domain randomization technique is called Incremental Ranges Expansion Domain Randomization (IRE). This method focuses on gradually increasing the randomization ranges as training progresses, allowing the agent to adapt initially to a narrower, more controlled range before being exposed to more diverse dynamics. The algorithm begins with ranges defined around the original masses of the thigh, leg, and foot, equal to the ones used in the UDR. The lower bound of the range remains fixed, while the upper bound is incrementally expanded. The expansion of the ranges is determined dynamically based on the training progress. Specifically, the upper bound of each range increases logarithmically with training progress, scaled by a factor of 0.5 to control the expansion rate. In this way, at the end of the training progress, the ranges are equal to the starting ranges of RRDR. This gradual increase ensures a smooth transition from focused exploration at the start of training to a broader exploration of dynamics as training continues. For each body part, the mass is sampled from a normal distribution centered on the midpoint of the dynamically adjusted range, and the standard deviation of the distribution decreases as training progresses, focusing the sampling around the mean. This approach is inspired by the principles of curriculum learning, where tasks or training examples are presented in a structured manner, starting with simpler scenarios and progressively increasing complexity. This behaviour is partially described in the Automatic Domain Randomization approach \cite{Akkaya2020}. In the context of IRE, the early training phases expose the agent to predictable dynamics within narrower ranges, facilitating stable policy learning. As training progresses, the broader ranges introduce more diverse dynamics, improving the agent's robustness and generalization to varying conditions. By the end of training, the agent is exposed to a wide range of dynamics, promoting adaptability and performance across different scenarios.
+The third type of implemented domain randomization technique is called Incremental Ranges Expansion Domain Randomization (IRE). This method focuses on gradually increasing the randomization ranges as training progresses, allowing the agent to adapt initially to a narrower, more controlled range before being exposed to more diverse dynamics. The algorithm begins with ranges defined around the original masses of the thigh, leg, and foot, equal to the ones used in the UDR. The lower bound of the range remains fixed, while the upper bound is incrementally expanded. The expansion of the ranges is determined dynamically based on the training progress. Specifically, the upper bound of each range increases logarithmically with training progress, scaled by a factor of 0.5 to control the expansion rate. In this way, at the end of the training progress, the ranges are equal to the starting ranges of RRDR. This gradual increase ensures a smooth transition from focused exploration at the start of training to a broader exploration of dynamics as training continues. For each body part, the mass is sampled from a normal distribution centered on the midpoint of the dynamically adjusted range, and the standard deviation of the distribution decreases as training progresses, focusing the sampling around the mean. This approach is inspired by the principles of curriculum learning, where tasks or training examples are presented in a structured manner, starting with simpler scenarios and progressively increasing complexity. This behaviour is partially described in the Automatic Domain Randomization approach \cite{Akkaya2020}. In the context of IRE, the early training phases expose the agent to predictable dynamics within narrower ranges, facilitating stable policy learning. As training progresses, the broader ranges introduce more diverse dynamics, improving the agent's robustness and generalization to varying conditions. By the end of training, the agent is exposed to a wide range of dynamics, promoting adaptability and performance across different scenarios.\\
 
-The next three domain randomization techniques are based on the use of the previous three algorithm in different orders.
+The next three domain randomization techniques are based on the use of the previous three algorithm in different orders.\\
 
-The fourth type of implemented domain randomization technique is called Exploration Uniform Domain Randomization (EUDR). This method divides the training process into three distinct phases, each focusing on a specific goal: exploration, controlled randomization, and exploitation. The phases are determined by dividing the total training steps into three parts: an increment phase, where the IRE algorithm is executed, a reducing phase, where the RRDR algorithm is executed, and a uniform phase, where the UDR algorithm is executed. During the increment phase, the algorithm focuses on exploration by gradually increasing the randomization ranges around the original mass values. This phase uses a higher entropy coefficient for the policy to encourage exploration. Next, in the reducing phase, the randomization ranges are progressively narrowed, allowing the agent to explore more diverse dynamics while maintaining a controlled focus. The entropy coefficient is reduced during this phase to stabilize policy learning. Finally, the uniform phase applies fixed randomization ranges that align with the original Uniform Domain Randomization (UDR) approach. This phase uses the smallest entropy coefficient, emphasizing exploitation of the learned policy. The incremented and reduced ranges are perfectly alligned, considering the values previously indicated. The choice of entropy coefficients is dynamically adjusted based on the reinforcement learning algorithm being used. For instance, higher entropy coefficients are set for the Soft Actor-Critic (SAC) algorithm during the early exploration phase, while the Proximal Policy Optimization (PPO) algorithm uses smaller coefficients to balance exploration and exploitation. The algorithm dynamically determines the current phase and adjusts both the entropy coefficients and randomization ranges accordingly.
+The fourth type of implemented domain randomization technique is called Exploration Uniform Domain Randomization (EUDR). This method divides the training process into three distinct phases, each focusing on a specific goal: exploration, controlled randomization, and exploitation. The phases are determined by dividing the total training steps into three parts: an increment phase, where the IRE algorithm is executed, a reducing phase, where the RRDR algorithm is executed, and a uniform phase, where the UDR algorithm is executed. During the increment phase, the algorithm focuses on exploration by gradually increasing the randomization ranges around the original mass values. This phase uses a higher entropy coefficient for the policy to encourage exploration. Next, in the reducing phase, the randomization ranges are progressively narrowed, allowing the agent to explore more diverse dynamics while maintaining a controlled focus. The entropy coefficient is reduced during this phase to stabilize policy learning. Finally, the uniform phase applies fixed randomization ranges that align with the original Uniform Domain Randomization (UDR) approach. This phase uses the smallest entropy coefficient, emphasizing exploitation of the learned policy. The incremented and reduced ranges are perfectly alligned, considering the values previously indicated. The choice of entropy coefficients is dynamically adjusted based on the reinforcement learning algorithm being used. For instance, higher entropy coefficients are set for the Soft Actor-Critic (SAC) algorithm during the early exploration phase, while the Proximal Policy Optimization (PPO) algorithm uses smaller coefficients to balance exploration and exploitation. The algorithm dynamically determines the current phase and adjusts both the entropy coefficients and randomization ranges accordingly.\\
 
-The fifth domain randomization technique implemented is the Dynamic Range Cycle Domain Randomization (DRC). This method divides the training process into three recurring phases: Uniform Domain Randomization, Incremental Ranges Expansion Domain Randomization, and Reducing Ranged Domain Randomization. The algorithm cycles through these phases with the aim of balancing exploration and exploitation at different stages of training. Initially, the uniform phase applies fixed randomization ranges around the original masses, promoting a balanced exploration of the dynamics. This phase is followed by the increment phase, where the randomization ranges are progressively expanded. The larger ranges in this phase encourage exploration of diverse dynamics beyond the original environment parameters. The final phase, reducing randomization, narrows the ranges incrementally, allowing the agent to focus on mastering dynamics closer to the target domain.The DRC algorithm dynamically adjusts the entropy coefficient based on the reinforcement learning algorithm in use, such as Soft Actor-Critic (SAC) or Proximal Policy Optimization (PPO). During the increment phase, the entropy coefficient is increased to enhance exploration, while it is reduced during the uniform and reducing phases to stabilize learning and prioritize exploitation. The phases are proportionally divided across the total training steps, with 20\% of the steps allocated to the uniform phase, 40\% to the increment phase, and 40\% to the reducing phase. This cyclic structure ensures that the agent is exposed to diverse dynamics at regular intervals, facilitating both robust exploration and targeted fine-tuning. By combining adaptive range management and entropy tuning, DRC provides a structured yet flexible framework for training agents in complex environments. A similar approach was used in \cite{Akkaya2020}. The defined Automatic Domain Randomization, however, increases and reduces the distribution thresholds considering the obtained average model performance, while in my case, the distribution is increased and reduced considering the training steps.
+The fifth domain randomization technique implemented is the Dynamic Range Cycle Domain Randomization (DRC). This method divides the training process into three recurring phases: Uniform Domain Randomization, Incremental Ranges Expansion Domain Randomization, and Reducing Ranged Domain Randomization. The algorithm cycles through these phases with the aim of balancing exploration and exploitation at different stages of training. Initially, the uniform phase applies fixed randomization ranges around the original masses, promoting a balanced exploration of the dynamics. This phase is followed by the increment phase, where the randomization ranges are progressively expanded. The larger ranges in this phase encourage exploration of diverse dynamics beyond the original environment parameters. The final phase, reducing randomization, narrows the ranges incrementally, allowing the agent to focus on mastering dynamics closer to the target domain.The DRC algorithm dynamically adjusts the entropy coefficient based on the reinforcement learning algorithm in use, such as Soft Actor-Critic (SAC) or Proximal Policy Optimization (PPO). During the increment phase, the entropy coefficient is increased to enhance exploration, while it is reduced during the uniform and reducing phases to stabilize learning and prioritize exploitation. The phases are proportionally divided across the total training steps, with 20\% of the steps allocated to the uniform phase, 40\% to the increment phase, and 40\% to the reducing phase. This cyclic structure ensures that the agent is exposed to diverse dynamics at regular intervals, facilitating both robust exploration and targeted fine-tuning. By combining adaptive range management and entropy tuning, DRC provides a structured yet flexible framework for training agents in complex environments. A similar approach was used in \cite{Akkaya2020}. The defined Automatic Domain Randomization, however, increases and reduces the distribution thresholds considering the obtained average model performance, while in my case, the distribution is increased and reduced considering the training steps.\\
 
-The sixth and last domain randomization method implemented is the Dynamic Exploration Domain Randomization (DEDR). This technique divides the training process into three phases: Reducing Ranged Domain Randomization, Uniform Domain Randomization, and Incremental Ranges Expansion Domain Randomization, each designed to guide the agent through distinct exploration and exploitation strategies during training. Initially, the reducing phase employs large randomization ranges around the original masses, encouraging extensive exploration of the environment's dynamics. This phase, which spans 40\% of the total training steps, ensures that the agent is exposed to diverse variations early in the training process, helping to prevent premature convergence to suboptimal policies. The reducing phase transitions into the uniform phase, accounting for 30\% of the training steps, where fixed randomization ranges are applied. These ranges are equal to the decreased ranges obtained after the RRDR algorithm end, striking a balance between exploration and stability. In the final increment phase, spanning the remaining 30\% of the training, the randomization ranges are gradually expanded again, focusing the exploration on variations near those encountered during the uniform phase. The entropy coefficient is dynamically adjusted based on the training phase and reinforcement learning algorithm in use. During the reducing phase, the entropy coefficient is set higher to promote exploration, while it is lowered during the uniform phase to stabilize learning. In the increment phase, a moderate entropy coefficient ensures controlled exploration near the learned dynamics. This structured progression of exploration and exploitation phases, combined with adaptive range adjustments, enables the DEDR method to systematically guide the agent toward robust policy learning in dynamic environments.
+The sixth and last domain randomization method implemented is the Dynamic Exploration Domain Randomization (DEDR). This technique divides the training process into three phases: Reducing Ranged Domain Randomization, Uniform Domain Randomization, and Incremental Ranges Expansion Domain Randomization, each designed to guide the agent through distinct exploration and exploitation strategies during training. Initially, the reducing phase employs large randomization ranges around the original masses, encouraging extensive exploration of the environment's dynamics. This phase, which spans 40\% of the total training steps, ensures that the agent is exposed to diverse variations early in the training process, helping to prevent premature convergence to suboptimal policies. The reducing phase transitions into the uniform phase, accounting for 30\% of the training steps, where fixed randomization ranges are applied. These ranges are equal to the decreased ranges obtained after the RRDR algorithm end, striking a balance between exploration and stability. In the final increment phase, spanning the remaining 30\% of the training, the randomization ranges are gradually expanded again, focusing the exploration on variations near those encountered during the uniform phase. The entropy coefficient is dynamically adjusted based on the training phase and reinforcement learning algorithm in use. During the reducing phase, the entropy coefficient is set higher to promote exploration, while it is lowered during the uniform phase to stabilize learning. In the increment phase, a moderate entropy coefficient ensures controlled exploration near the learned dynamics. This structured progression of exploration and exploitation phases, combined with adaptive range adjustments, enables the DEDR method to systematically guide the agent toward robust policy learning in dynamic environments.\\
 
 \section{Experiments and Results}
 
@@ -163,28 +163,28 @@ The first set of experiments was conducted without domain randomization, serving
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_no_rand_Source.png}
-        \caption{Figure 1. SAC Source Domain without DR}
+        \caption{SAC Source Domain without DR}
         \label{fig:sac_source_no_dr}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_no_rand_Target.png}
-        \caption{Figure 2. SAC Target Domain without DR}
+        \caption{SAC Target Domain without DR}
         \label{fig:sac_target_no_dr}
     \end{minipage}
     \vfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_no_rand_Source.png}
-        \caption{Figure 3. PPO Source Domain without DR}
+        \caption{PPO Source Domain without DR}
         \label{fig:ppo_source_no_dr}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_no_rand_Source.png}
-        \caption{Figure 4. PPO Target Domain without DR}
+        \caption{PPO Target Domain without DR}
         \label{fig:ppo_target_no_dr}
     \end{minipage}
 \end{figure}
@@ -226,28 +226,28 @@ The next set of experiments was conducted using the Uniform Domain Randomization
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_Uniform_Source.png}
-        \caption{Figure 5. SAC Source Domain with UDR}
+        \caption{SAC Source Domain with UDR }
         \label{fig:sac_source_udr}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_Uniform_Target.png}
-        \caption{Figure 6. SAC Target Domain with UDR}
+        \caption{SAC Target Domain with UDR}
         \label{fig:sac_target_udr}
     \end{minipage}
     \vfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_Uniform_Source.png}
-        \caption{Figure 7. PPO Source Domain with UDR}
+        \caption{PPO Source Domain with UDR}
         \label{fig:ppo_source_udr}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_Uniform_Target.png}
-        \caption{Figure 8. PPO Target Domain with UDR}
+        \caption{PPO Target Domain with UDR}
         \label{fig:ppo_target_udr}
     \end{minipage}
 \end{figure}
@@ -289,29 +289,29 @@ First of all, I have defined a medium increment ranges, where ranges are increas
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_Uniform_Medium_Source.png}
-        \caption{Figure 9. SAC Source Domain with UDR and larger ranges}
-        \label{fig:sac_source_udr_larger}
+        \caption{SAC Source Domain with UDR and medium ranges}
+        \label{fig:sac_source_udr_medium}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_Uniform_Medium_Target.png}
-        \caption{Figure 10. SAC Target Domain with UDR and larger ranges}
-        \label{fig:sac_target_udr_larger}
+        \caption{SAC Target Domain with UDR and medium ranges}
+        \label{fig:sac_target_udr_medium}
     \end{minipage}
     \vfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_Uniform_Medium_Source.png}
-        \caption{Figure 11. PPO Source Domain with UDR and larger ranges}
-        \label{fig:ppo_source_udr_larger}
+        \caption{PPO Source Domain with UDR and medium ranges}
+        \label{fig:ppo_source_udr_medium}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_Uniform_Medium_Target.png}
-        \caption{Figure 12. PPO Target Domain with UDR and larger ranges}
-        \label{fig:ppo_target_udr_larger}
+        \caption{Figure 12. PPO Target Domain with UDR and medium ranges}
+        \label{fig:ppo_target_udr_medium}
     \end{minipage}
 \end{figure}
 
@@ -330,7 +330,7 @@ In the following table, I report the mean reward and standard deviation obtained
         PPO & Target $\rightarrow$ Target & 1048.83 & 248.37 \\ \hline
     \end{tabular}
     \caption{Results of SAC and PPO with Uniform Domain Randomization and medium ranges.}
-    \label{tab:results_udr_larger}
+    \label{tab:results_udr_medium}
 \end{table}
 
 The results show an increment of the mean reward values of the SAC model, but an decreasing of the mean reward values of the PPO model, comparing them with the results obtained in the previous UDR analysis. The rendering of the results shows that the SAC model is not able to find a good policy that moves correctly the hopper in both the source and the target domain, even there is an improvemenent compared to previous results. However, the results obtained with PPO shows that the model is not able to find a good policy to move correctly the hopper in both the environments. 
@@ -342,28 +342,28 @@ The following four pictures shows the learning curve of SAC and PPO considering 
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_Uniform_Large_Source.png}
-        \caption{Figure 13. SAC Source Domain with UDR and larger ranges}
+        \caption{SAC Source Domain with UDR and larger ranges}
         \label{fig:sac_source_udr_larger}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_Uniform_Large_Target.png}
-        \caption{Figure 14. SAC Target Domain with UDR and larger ranges}
+        \caption{SAC Target Domain with UDR and larger ranges}
         \label{fig:sac_target_udr_larger}
     \end{minipage}
     \vfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_Uniform_Large_Source.png}
-        \caption{Figure 15. PPO Source Domain with UDR and larger ranges}
+        \caption{PPO Source Domain with UDR and larger ranges}
         \label{fig:ppo_source_udr_larger}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_Uniform_Large_Target.png}
-        \caption{Figure 16. PPO Target Domain with UDR and larger ranges}
+        \caption{PPO Target Domain with UDR and larger ranges}
         \label{fig:ppo_target_udr_larger}
     \end{minipage}
 \end{figure}
@@ -405,28 +405,28 @@ The next set of experiments was conducted using the Reducing Ranged Domain Rando
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_Reducing_Source.png}
-        \caption{Figure 17. SAC Source Domain with RRDR}
+        \caption{SAC Source Domain with RRDR}
         \label{fig:sac_source_rrdr}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_Reducing_Target.png}
-        \caption{Figure 18. SAC Target Domain with RRDR}
+        \caption{SAC Target Domain with RRDR}
         \label{fig:sac_target_rrdr}
     \end{minipage}
     \vfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_curve_PPO_reducing_Source.png}
-        \caption{Figure 19. PPO Source Domain with RRDR}
+        \caption{PPO Source Domain with RRDR}
         \label{fig:ppo_source_rrdr}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_curve_PPO_reducing_Target.png}
-        \caption{Figure 20. PPO Target Domain with RRDR}
+        \caption{PPO Target Domain with RRDR}
         \label{fig:ppo_target_rrdr}
     \end{minipage}
 
@@ -463,28 +463,28 @@ The next set of experiments was conducted using the Incremental Ranges Expansion
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_Incremental_Source.png}
-        \caption{Figure 21. SAC Source Domain with IRE}
+        \caption{SAC Source Domain with IRE}
         \label{fig:sac_source_ire}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_Incremental_Target.png}
-        \caption{Figure 22. SAC Target Domain with IRE}
+        \caption{SAC Target Domain with IRE}
         \label{fig:sac_target_ire}
     \end{minipage}
     \vfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_Incremental_Source.png}
-        \caption{Figure 23. PPO Source Domain with IRE}
+        \caption{PPO Source Domain with IRE}
         \label{fig:ppo_source_ire}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_Incremental_Target.png}
-        \caption{Figure 24. PPO Target Domain with IRE}
+        \caption{PPO Target Domain with IRE}
         \label{fig:ppo_target_ire}
     \end{minipage}
 \end{figure}
@@ -522,28 +522,28 @@ The next set of experiments was conducted using the Exploration Uniform Domain R
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_EU_Source.png}
-        \caption{Figure 25. SAC Source Domain with EUDR}
+        \caption{SAC Source Domain with EUDR}
         \label{fig:sac_source_eudr}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_EU_Target.png}
-        \caption{Figure 26. SAC Target Domain with EUDR}
+        \caption{SAC Target Domain with EUDR}
         \label{fig:sac_target_eudr}
     \end{minipage}
     \vfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_EU_Source.png}
-        \caption{Figure 27. PPO Source Domain with EUDR}
+        \caption{PPO Source Domain with EUDR}
         \label{fig:ppo_source_eudr}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_EU_Target.png}
-        \caption{Figure 28. PPO Target Domain with EUDR}
+        \caption{PPO Target Domain with EUDR}
         \label{fig:ppo_target_eudr}
     \end{minipage}
 \end{figure}
@@ -583,28 +583,28 @@ The next set of experiments was conducted using the Dynamic Range Cycle Domain R
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_DRC_Source.png}
-        \caption{Figure 29. SAC Source Domain with DRC}
+        \caption{SAC Source Domain with DRC}
         \label{fig:sac_source_drc}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_DRC_Target.png}
-        \caption{Figure 30. SAC Target Domain with DRC}
+        \caption{SAC Target Domain with DRC}
         \label{fig:sac_target_drc}
     \end{minipage}
     \vfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_DRC_Source.png}
-        \caption{Figure 31. PPO Source Domain with DRC}
+        \caption{PPO Source Domain with DRC}
         \label{fig:ppo_source_drc}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_DRC_Target.png}
-        \caption{Figure 32. PPO Target Domain with DRC}
+        \caption{PPO Target Domain with DRC}
         \label{fig:ppo_target_drc}
     \end{minipage}
 \end{figure}
@@ -646,28 +646,28 @@ The next and last set of experiments was conducted using the Dynamic Exploration
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_DE_Source.png}
-        \caption{Figure 33. SAC Source Domain with DEDR}
+        \caption{SAC Source Domain with DEDR}
         \label{fig:sac_source_dedr}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_SAC_DE_Target.png}
-        \caption{Figure 34. SAC Target Domain with DEDR}
+        \caption{SAC Target Domain with DEDR}
         \label{fig:sac_target_dedr}
     \end{minipage}
     \vfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_DE_Source.png}
-        \caption{Figure 35. PPO Source Domain with DEDR}
+        \caption{PPO Source Domain with DEDR}
         \label{fig:ppo_source_dedr}
     \end{minipage}
     \hfill
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{../images/Learning_Curve_PPO_DE_Target.png}
-        \caption{Figure 36. PPO Target Domain with DEDR}
+        \caption{PPO Target Domain with DEDR}
         \label{fig:ppo_target_dedr}
     \end{minipage}
 \end{figure}

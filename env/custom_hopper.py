@@ -45,9 +45,9 @@ class CustomHopper(MujocoEnv, utils.EzPickle):
         # Medium ranges  0.8
         # Large ranges 1.5
         categories = {
-            "Thigh": (self.original_masses[1] - 1.5, self.original_masses[1] + 1.5),   # Range for light mass (foot)
-            "Leg": (self.original_masses[2] -1.5, self.original_masses[2] + 1.5),  # Range for medium mass (leg)
-            "Foot": (self.original_masses[3]-1.5, self.original_masses[3] + 1.5),   # Range for heavy mass (thigh)
+            "Thigh": (self.original_masses[1] - 0.2, self.original_masses[1] + 0.2),   # Range for light mass (foot)
+            "Leg": (self.original_masses[2] -0.2, self.original_masses[2] + 0.2),  # Range for medium mass (leg)
+            "Foot": (self.original_masses[3]-0.2, self.original_masses[3] + 0.2),   # Range for heavy mass (thigh)
         }
                
         # Assign categories to body parts
@@ -65,10 +65,9 @@ class CustomHopper(MujocoEnv, utils.EzPickle):
     #REDUCING RANGES DOMAIN RANDOMIZATION
     def set_rrdr_parameters(self, step, total_steps):
         self.set_parameters(self.sample_rrdr_parameters(step, total_steps))
-        #print(self.sim.model.body_mass)
         
     def sample_rrdr_parameters(self, step, total_steps):
-        # Calculate the ADR factor (start with a high factor for exploration)
+        # Calculate the RRDR factor (start with a high factor for exploration)
         rrdr_factor = self.get_rrdr_factor(step, total_steps, max_factor=0.5, min_factor=0.0)
         
         # Define categories for different body parts with large ranges for exploration ( max - min distanze = 0.7)
@@ -96,7 +95,7 @@ class CustomHopper(MujocoEnv, utils.EzPickle):
 
             
     def get_rrdr_factor(self, current_step, total_steps, max_factor, min_factor):
-        # Calculate the ADR factor based on the current training step
+        # Calculate the RRDR factor based on the current training step
         progress = current_step / total_steps
         
         # Early phase: Large ADR factor for exploration
