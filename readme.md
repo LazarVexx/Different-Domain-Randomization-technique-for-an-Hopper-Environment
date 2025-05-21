@@ -1,41 +1,77 @@
-# Starting code for course project of Robot Learning - 01HFNOV
+# Hopper Domain Randomization in Reinforcement Learning
 
-Official assignment at [Google Doc](https://docs.google.com/document/d/1yA9Ta4rWlh2YcRfhtbeJp0TpS-2nUsKK8-wpp3iEj0M/edit?usp=sharing)
+**Author:** Luca Ianniello  
+**Date:** January 17, 2025  
+**Course:** Robot Learning – Politecnico of Turin  
 
+## 📌 Overview
 
-## Getting started
+This project investigates various **Domain Randomization (DR)** techniques in the **Hopper environment** from OpenAI Gym, using two state-of-the-art reinforcement learning algorithms: **Soft Actor-Critic (SAC)** and **Proximal Policy Optimization (PPO)**. The core goal is to evaluate and compare the impact of different DR strategies on the generalization and robustness of learned policies.
 
-Before starting to implement your own code, make sure to:
-1. read and study the material provided (see Section 1 of the assignment)
-2. read the documentation of the main packages you will be using ([mujoco-py](https://github.com/openai/mujoco-py), [Gym](https://github.com/openai/gym), [stable-baselines3](https://stable-baselines3.readthedocs.io/en/master/index.html))
-3. play around with the code in the template to familiarize with all the tools. Especially with the `test_random_policy.py` script.
+The work builds on the classical **Uniform Domain Randomization (UDR)** and extends it by proposing and testing **five novel DR strategies**, focusing on dynamic adjustments of the randomization ranges during training.
 
+---
 
-### 1. Local (Linux)
+## 🧠 Motivation
 
-if you have a Linux system, you can work on the course project directly on your local machine. By doing so, you will also be able to render the Mujoco Hopper environment and visualize what is happening. This code has been tested on Linux with python 3.7.
+In Reinforcement Learning, **generalization** to unseen environments remains a critical challenge, especially when transferring from simulation to the real world—a phenomenon known as the **reality gap**. **Domain Randomization** tackles this by training agents across varying simulation parameters to improve robustness.
 
-**Dependencies**
-- Install MuJoCo and the Python Mujoco interface following the instructions here: https://github.com/openai/mujoco-py
-- Run `pip install -r requirements.txt` to further install `gym` and `stable-baselines3`.
+This project explores whether more structured or dynamic randomization techniques can outperform traditional UDR in promoting agent generalization.
 
-Check your installation by launching `python test_random_policy.py`.
+---
 
+## 🚀 Objectives
 
-### 2. Local (Windows)
-As the latest version of `mujoco-py` is not compatible for Windows explicitly, you may:
-- Try installing WSL2 (requires fewer resources) or a full Virtual Machine to run Linux on Windows. Then you can follow the instructions above for Linux.
-- (not recommended) Try downloading a [previous version](https://github.com/openai/mujoco-py/blob/9ea9bb000d6b8551b99f9aa440862e0c7f7b4191/) of `mujoco-py`.
-- (not recommended) Stick to the Google Colab template (see below), which runs on the browser regardless of the operating system. This option, however, will not allow you to render the environment in an interactive window for debugging purposes.
+- Implement and train agents using **SAC** and **PPO** algorithms.
+- Apply and compare **six domain randomization techniques** in the Hopper environment.
+- Analyze the performance impact of each technique.
+- Assess robustness and transferability across varying dynamics.
 
+---
 
-### 3. Google Colab
+## 🧪 Domain Randomization Techniques
 
-You can also run the code on [Google Colab](https://colab.research.google.com/)
+### 1. Uniform Domain Randomization (UDR)
+- Applies static uniform sampling for body part masses (thigh, leg, foot).
+- Uses three distinct ranges based on original mass values ±0.2.
+- Simple and fixed randomization across the whole training.
 
-- Download all files contained in the `colab_template` folder in this repo.
-- Load the `test_random_policy.ipynb` file on [https://colab.research.google.com/](colab) and follow the instructions on it
+### 2. Reducing Ranged Domain Randomization (RRDR)
+- Begins with large randomization ranges, gradually shrinking over time.
+- Masses sampled from a **normal distribution**, focusing over time.
+- Mimics a reverse-curriculum learning strategy.
 
-NOTE 1: rendering is currently **not** officially supported on Colab, making it hard to see the simulator in action. We recommend that each group manages to play around with the visual interface of the simulator at least once, to best understand what is going on with the underlying Hopper environment.
+### 3. Incremental Ranges Expansion (IRE)
+- Starts with narrow UDR-like ranges.
+- Expands the **upper bound** logarithmically throughout training.
+- Masses sampled from a normal distribution with decreasing variance.
 
-NOTE 2: you need to stay connected to the Google Colab interface at all times for your python scripts to keep training.
+### 4. Exploration UDR (EUDR)
+- Combines IRE → RRDR → UDR in 3 training phases:
+  - **Exploration phase** (IRE, high entropy).
+  - **Controlled adaptation phase** (RRDR, medium entropy).
+  - **Exploitation phase** (UDR, low entropy).
+- Entropy coefficients are adjusted based on training phase and algorithm.
+
+### 5. Dynamic Range Cycle (DRC)
+- Cycles between UDR → IRE → RRDR.
+- 20% → 40% → 40% phase split.
+- Promotes regular exploration–exploitation shifts during training.
+- Entropy dynamically tuned across cycles.
+
+### 6. Dynamic Exploration Domain Randomization (DEDR)
+- Uses the sequence RRDR → UDR → IRE (40% → 30% → 30%).
+- Early exploration, mid stability, late-stage adaptation.
+- Balanced entropy scheduling across phases.
+
+---
+
+## 🛠 Technologies
+
+- **Language**: Python 3.10+
+- **Frameworks**:  
+  - [PyTorch](https://pytorch.org/)  
+  - [Stable-Baselines3](https://github.com/DLR-RM/stable-baselines3)
+  - [OpenAI Gym](https://www.gymlibrary.dev/)  
+- **Environment**: Custom Hopper (based on MuJoCo)
+
